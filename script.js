@@ -126,24 +126,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-const googleCadastroBtn = document.getElementById("google-cadastro-btn");
-
-googleCadastroBtn.addEventListener("click", async () => {
-  clearMessage();
-
-  googleCadastroBtn.disabled = true;
-  googleCadastroBtn.style.opacity = "0.7";
-
-  const { error } = await supabaseClient.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: window.location.origin + "/perfil.html"
-    }
-  });
-
-  if (error) {
-    googleCadastroBtn.disabled = false;
-    googleCadastroBtn.style.opacity = "1";
-    showMessage("Não foi possível criar conta com Google.");
-  }
-});

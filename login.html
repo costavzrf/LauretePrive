@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Júlia Privé | Login</title>
   <link rel="stylesheet" href="style.css"/>
+
+   <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+  </style>
 </head>
 <body>
 
@@ -494,6 +501,15 @@
 
   verificarSessao();
 </script>
+
+<script>
+  window.addEventListener("load", () => {
+    document.body.style.opacity = "1";
+  });
+</script>
+
+</body>
+</html>
 
 </body>
 </html>
