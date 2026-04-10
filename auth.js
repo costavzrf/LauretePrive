@@ -12,10 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const cadastroBtn = document.getElementById("cadastro-btn");
   const authMessage = document.getElementById("auth-message");
   const forgotPasswordLink = document.getElementById("forgot-password-link");
+  const googleLoginBtn = document.getElementById("google-login-btn");
+  const googleCadastroBtn = document.getElementById("google-cadastro-btn");
 
   function showMessage(text, type = "error") {
+    if (!authMessage) return;
+
     authMessage.innerHTML = text;
     authMessage.style.display = "block";
+    authMessage.style.marginBottom = "16px";
+    authMessage.style.padding = "12px 14px";
+    authMessage.style.borderRadius = "12px";
+    authMessage.style.fontSize = "14px";
+    authMessage.style.lineHeight = "1.5";
 
     if (type === "success") {
       authMessage.style.background = "rgba(46, 204, 113, 0.12)";
@@ -29,39 +38,66 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function clearMessage() {
+    if (!authMessage) return;
     authMessage.style.display = "none";
     authMessage.innerHTML = "";
   }
 
   function setLoading(button, loadingText, normalText, isLoading) {
+    if (!button) return;
     button.disabled = isLoading;
     button.textContent = isLoading ? loadingText : normalText;
     button.style.opacity = isLoading ? "0.7" : "1";
+    button.style.cursor = isLoading ? "not-allowed" : "pointer";
+  }
+
+  function setGoogleLoading(button, isLoading) {
+    if (!button) return;
+    button.disabled = isLoading;
+    button.style.opacity = isLoading ? "0.7" : "1";
+    button.style.cursor = isLoading ? "not-allowed" : "pointer";
   }
 
   function activateTab(tabName) {
-    authTabs.forEach(tab => tab.classList.remove("active"));
+    authTabs.forEach((tab) => tab.classList.remove("active"));
 
     if (tabName === "login") {
-      document.querySelector('[data-tab="login"]').classList.add("active");
-      loginPanel.classList.add("active");
-      cadastroPanel.classList.remove("active");
+      const loginTab = document.querySelector('[data-tab="login"]');
+      if (loginTab) loginTab.classList.add("active");
+      if (loginPanel) loginPanel.classList.add("active");
+      if (cadastroPanel) cadastroPanel.classList.remove("active");
     } else {
-      document.querySelector('[data-tab="cadastro"]').classList.add("active");
-      cadastroPanel.classList.add("active");
-      loginPanel.classList.remove("active");
+      const cadastroTab = document.querySelector('[data-tab="cadastro"]');
+      if (cadastroTab) cadastroTab.classList.add("active");
+      if (cadastroPanel) cadastroPanel.classList.add("active");
+      if (loginPanel) loginPanel.classList.remove("active");
     }
 
     clearMessage();
   }
 
-  authTabs.forEach(tab => {
+  authTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       activateTab(tab.dataset.tab);
     });
   });
 
-  async function salvarPerfil(user, nome) {
+  function extrairNomeDoUsuario(user) {
+    return (
+      user?.user_metadata?.nome ||
+      user?.user_metadata?.name ||
+      user?.user_metadata?.full_name ||
+      user?.identities?.[0]?.identity_data?.full_name ||
+      user?.identities?.[0]?.identity_data?.name ||
+      "Cliente"
+    );
+  }
+
+  async function salvarPerfil(user, nomeManual = null) {
+    if (!user?.id) return;
+
+    const nome = nomeManual || extrairNomeDoUsuario(user);
+
     const { error } = await supabaseClient
       .from("profiles")
       .upsert(
@@ -76,13 +112,37 @@ document.addEventListener("DOMContentLoaded", () => {
     if (error) throw error;
   }
 
+  function tratarErroLogin(error) {
+    const msg = (error?.message || "").toLowerCase();
+
+    if (msg.includes("invalid login credentials")) {
+      return "E-mail ou senha incorretos.";
+    }
+
+    return error?.message || "Não foi possível fazer login.";
+  }
+
+  function tratarErroCadastro(error) {
+    const msg = (error?.message || "").toLowerCase();
+
+    if (msg.includes("rate limit")) {
+      return "Muitas tentativas agora. Aguarde um pouco e tente novamente.";
+    }
+
+    if (msg.includes("already") || msg.includes("registered")) {
+      return "Esse e-mail já está cadastrado. Tente entrar ou recuperar sua senha.";
+    }
+
+    return error?.message || "Não foi possível criar a conta.";
+  }
+
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       clearMessage();
 
-      const email = document.getElementById("login-email").value.trim();
-      const senha = document.getElementById("login-senha").value;
+      const email = document.getElementById("login-email")?.value.trim();
+      const senha = document.getElementById("login-senha")?.value;
 
       if (!email || !senha) {
         showMessage("Preencha e-mail e senha.");
@@ -99,15 +159,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (error) throw error;
 
-        if (data.user) {
+        if (data.user && data.user.email_confirmed_at) {
+          await salvarPerfil(data.user);
           showMessage("Login realizado com sucesso. Redirecionando...", "success");
 
           setTimeout(() => {
-            window.location.href = "index.html";
-          }, 1200);
+            window.location.href = "perfil.html";
+          }, 1000);
+        } else {
+          await supabaseClient.auth.signOut();
+          showMessage("Você precisa confirmar seu e-mail antes de entrar.");
         }
       } catch (error) {
-        showMessage(error.message || "Não foi possível fazer login.");
+        showMessage(tratarErroLogin(error));
       } finally {
         setLoading(loginBtn, "Entrando...", "Entrar agora", false);
       }
@@ -119,11 +183,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       clearMessage();
 
-      const nome = document.getElementById("cadastro-nome").value.trim();
-      const email = document.getElementById("cadastro-email").value.trim();
-      const senha = document.getElementById("cadastro-senha").value;
-      const confirmar = document.getElementById("cadastro-confirmar").value;
-      const termos = document.getElementById("cadastro-termos").checked;
+      const nome = document.getElementById("cadastro-nome")?.value.trim();
+      const email = document.getElementById("cadastro-email")?.value.trim();
+      const senha = document.getElementById("cadastro-senha")?.value;
+      const confirmar = document.getElementById("cadastro-confirmar")?.value;
+      const termos = document.getElementById("cadastro-termos")?.checked;
 
       if (!nome || !email || !senha || !confirmar) {
         showMessage("Preencha todos os campos do cadastro.");
@@ -154,7 +218,8 @@ document.addEventListener("DOMContentLoaded", () => {
           options: {
             data: {
               nome: nome
-            }
+            },
+            emailRedirectTo: window.location.origin + "/login.html"
           }
         });
 
@@ -168,11 +233,14 @@ document.addEventListener("DOMContentLoaded", () => {
           showMessage("Conta criada com sucesso. Redirecionando...", "success");
 
           setTimeout(() => {
-            window.location.href = "index.html";
-          }, 1200);
+            window.location.href = "perfil.html";
+          }, 1000);
         } else {
           showMessage(
-            "Conta criada com sucesso! Verifique seu e-mail e clique no link de confirmação para ativar sua conta. Veja também a caixa de spam.",
+            `Conta criada com sucesso! ✅<br><br>
+            Enviamos um e-mail de confirmação.<br>
+            Abra sua caixa de entrada e clique no link para ativar sua conta.<br><br>
+            ⚠️ Verifique também a pasta spam.`,
             "success"
           );
 
@@ -180,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
           activateTab("login");
         }
       } catch (error) {
-        showMessage(error.message || "Não foi possível criar a conta.");
+        showMessage(tratarErroCadastro(error));
       } finally {
         setLoading(cadastroBtn, "Criando conta...", "Criar conta", false);
       }
@@ -192,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       clearMessage();
 
-      const email = document.getElementById("login-email").value.trim();
+      const email = document.getElementById("login-email")?.value.trim();
 
       if (!email) {
         showMessage("Digite seu e-mail no campo de login para recuperar a senha.");
@@ -208,18 +276,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
         showMessage("Enviamos o link de recuperação para seu e-mail.", "success");
       } catch (error) {
-        showMessage(error.message || "Não foi possível enviar o e-mail de recuperação.");
+        showMessage(error?.message || "Não foi possível enviar o e-mail de recuperação.");
       }
+    });
+  }
+
+  async function continuarComGoogle(button, mensagemErro) {
+    clearMessage();
+    setGoogleLoading(button, true);
+
+    const { error } = await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin + "/perfil.html"
+      }
+    });
+
+    if (error) {
+      setGoogleLoading(button, false);
+      showMessage(mensagemErro || "Não foi possível continuar com Google.");
+    }
+  }
+
+  if (googleLoginBtn) {
+    googleLoginBtn.addEventListener("click", async () => {
+      await continuarComGoogle(googleLoginBtn, "Não foi possível entrar com Google.");
+    });
+  }
+
+  if (googleCadastroBtn) {
+    googleCadastroBtn.addEventListener("click", async () => {
+      await continuarComGoogle(googleCadastroBtn, "Não foi possível criar conta com Google.");
     });
   }
 
   async function verificarSessao() {
     const { data } = await supabaseClient.auth.getSession();
 
-    if (data.session) {
-      window.location.href = "index.html";
+    if (data.session?.user) {
+      try {
+        await salvarPerfil(data.session.user);
+      } catch (error) {
+      }
+
+      window.location.href = "perfil.html";
     }
   }
+
+  supabaseClient.auth.onAuthStateChange(async (event, session) => {
+    if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
+      try {
+        await salvarPerfil(session.user);
+      } catch (error) {
+      }
+    }
+  });
 
   verificarSessao();
 });
