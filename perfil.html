@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Júlia Privé | Meu Perfil</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav">
+    <h1 class="logo">
+      <a href="index.html">Júlia<span>Privé</span></a>
+    </h1>
+
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html">Amostras</a></li>
+        <li><a href="packs.html">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="perfil.html" class="ativo">Perfil</a></li>
+      </ul>
+    </nav>
+
+    <a href="perfil.html" class="btn btn-topo">Minha conta</a>
+  </div>
+</header>
+
+<main class="perfil-page">
+  <section class="perfil-section">
+    <div class="container perfil-container">
+
+      <div class="perfil-loading" id="perfil-loading">
+        Carregando sua conta...
+      </div>
+
+      <div class="perfil-content" id="perfil-content" style="display: none;">
+        <div class="perfil-topo">
+          <div class="perfil-user-card">
+            <div class="perfil-avatar" id="perfil-avatar">JP</div>
+
+            <div class="perfil-user-info">
+              <p class="perfil-mini">Área do usuário</p>
+              <h2 id="perfil-nome">Carregando... <span>• Cliente</span></h2>
+              <p class="perfil-email" id="perfil-email">Carregando e-mail...</p>
+            </div>
+          </div>
+
+          <div class="perfil-top-actions">
+            <button type="button" class="btn secundario" id="editar-perfil-btn" disabled>Editar perfil</button>
+            <button type="button" class="btn terciario" id="logout-btn">Sair da conta</button>
+          </div>
+        </div>
+
+        <div class="perfil-grid">
+
+          <div class="perfil-main">
+            <div class="perfil-stats-grid">
+
+              <article class="perfil-stat-card">
+                <p class="perfil-stat-label">Total gasto</p>
+                <h3 id="total-gasto">R$ 0,00</h3>
+                <span>Será atualizado após suas compras</span>
+              </article>
+
+              <article class="perfil-stat-card">
+                <p class="perfil-stat-label">Packs adquiridos</p>
+                <h3 id="packs-adquiridos">0</h3>
+                <span id="packs-descricao">Nenhum pack liberado ainda</span>
+              </article>
+
+              <article class="perfil-stat-card perfil-stat-highlight">
+                <p class="perfil-stat-label">Plano VIP atual</p>
+                <h3 id="vip-atual">Nenhum</h3>
+                <span id="vip-validade">Assine um plano para liberar o acesso VIP</span>
+              </article>
+
+            </div>
+
+            <div class="perfil-box">
+              <div class="perfil-box-top">
+                <div>
+                  <p class="perfil-box-mini">Histórico</p>
+                  <h3>Packs adquiridos</h3>
+                </div>
+              </div>
+
+              <div class="perfil-items" id="perfil-items">
+                <div class="perfil-item perfil-item-empty">
+                  <div>
+                    <h4>Nenhuma compra ainda</h4>
+                    <p>Assim que você adquirir um pack, ele vai aparecer aqui.</p>
+                  </div>
+                  <span class="perfil-price">--</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="perfil-box">
+              <div class="perfil-box-top">
+                <div>
+                  <p class="perfil-box-mini">Assinatura</p>
+                  <h3>Meu plano VIP</h3>
+                </div>
+                <span class="perfil-badge" id="perfil-badge-status">Inativo</span>
+              </div>
+
+              <div class="perfil-vip-card">
+                <div class="perfil-vip-info">
+                  <span class="perfil-vip-chip" id="perfil-vip-chip">Sem plano</span>
+                  <h4 id="perfil-vip-titulo">VIP não ativo</h4>
+                  <p id="perfil-vip-texto">
+                    Você ainda não possui uma assinatura VIP ativa. Ao assinar, seus benefícios e período de acesso aparecerão aqui.
+                  </p>
+                </div>
+
+                <div class="perfil-vip-side">
+                  <strong id="perfil-vip-preco">--</strong>
+                  <small id="perfil-vip-renovacao">Sem renovação ativa</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="perfil-sidebar">
+            <div class="perfil-box">
+              <p class="perfil-box-mini">Resumo</p>
+              <h3>Conta e acesso</h3>
+
+              <div class="perfil-side-list">
+                <div class="perfil-side-item">
+                  <span>Status da conta</span>
+                  <strong id="status-conta">Verificada</strong>
+                </div>
+
+                <div class="perfil-side-item">
+                  <span>Plano VIP</span>
+                  <strong id="resumo-vip">Nenhum</strong>
+                </div>
+
+                <div class="perfil-side-item">
+                  <span>Packs liberados</span>
+                  <strong id="resumo-packs">0 acessos</strong>
+                </div>
+
+                <div class="perfil-side-item">
+                  <span>Total investido</span>
+                  <strong id="resumo-total">R$ 0,00</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="perfil-box">
+              <p class="perfil-box-mini">Ações rápidas</p>
+              <h3>Gerenciar conta</h3>
+
+              <div class="perfil-actions">
+                <a href="packs.html" class="btn principal">Ver packs</a>
+                <a href="vip.html" class="btn secundario">Ver VIP</a>
+                <a href="amostras.html" class="btn terciario">Explorar amostras</a>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <h2>Júlia<span>Privé</span></h2>
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = "https://ndazcilxpjyenkymqltc.supabase.co";
+  const supabaseKey = "sb_publishable_bAojqWTshY-UjOb_Q-0wnw_FuZ-MjC9";
+  const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  const perfilLoading = document.getElementById("perfil-loading");
+  const perfilContent = document.getElementById("perfil-content");
+  const logoutBtn = document.getElementById("logout-btn");
+  const editarPerfilBtn = document.getElementById("editar-perfil-btn");
+
+  function getInitials(name, email) {
+    if (name && name.trim()) {
+      const parts = name.trim().split(" ").filter(Boolean);
+      if (parts.length === 1) {
+        return parts[0].slice(0, 2).toUpperCase();
+      }
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+    if (email) {
+      return email.slice(0, 2).toUpperCase();
+    }
+
+    return "JP";
+  }
+
+  function formatCurrency(value) {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(value);
+  }
+
+  function preencherPerfil(user, profile) {
+    const nome = profile?.nome || user.user_metadata?.nome || "Cliente";
+    const email = profile?.email || user.email || "E-mail não disponível";
+    const iniciais = getInitials(nome, email);
+
+    document.getElementById("perfil-avatar").textContent = iniciais;
+    document.getElementById("perfil-nome").innerHTML = `${nome} <span>• Cliente</span>`;
+    document.getElementById("perfil-email").textContent = email;
+
+    const contaVerificada = user.email_confirmed_at ? "Verificada" : "Pendente";
+    document.getElementById("status-conta").textContent = contaVerificada;
+  }
+
+  async function buscarPerfil(userId) {
+    const { data, error } = await supabaseClient
+      .from("profiles")
+      .select("id, nome, email")
+      .eq("id", userId)
+      .single();
+
+    if (error) {
+      return null;
+    }
+
+    return data;
+  }
+
+  async function carregarConta() {
+    const { data, error } = await supabaseClient.auth.getUser();
+
+    if (error || !data.user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    const user = data.user;
+    const profile = await buscarPerfil(user.id);
+
+    preencherPerfil(user, profile);
+
+    perfilLoading.style.display = "none";
+    perfilContent.style.display = "block";
+  }
+
+  logoutBtn.addEventListener("click", async () => {
+    logoutBtn.disabled = true;
+    logoutBtn.textContent = "Saindo...";
+
+    await supabaseClient.auth.signOut();
+    window.location.href = "login.html";
+  });
+
+  editarPerfilBtn.addEventListener("click", () => {
+    alert("A edição de perfil será liberada em breve.");
+  });
+
+  carregarConta();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Júlia Privé | Login</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav">
+    <h1 class="logo">
+      <a href="index.html">Júlia<span>Privé</span></a>
+    </h1>
+
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html">Amostras</a></li>
+        <li><a href="packs.html">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
+
+    <a href="login.html" class="btn btn-topo">Entrar</a>
+  </div>
+</header>
+
+<main class="auth-page">
+  <section class="auth-section">
+    <div class="container auth-container">
+
+      <div class="auth-side">
+        <p class="tag">Conta</p>
+        <h2 class="auth-title">Entre na sua conta ou crie seu acesso</h2>
+        <p class="auth-desc">
+          Acesse sua área exclusiva, acompanhe seus conteúdos e entre de forma rápida
+          em uma experiência mais organizada e premium.
+        </p>
+
+        <div class="auth-points">
+          <span>🔒 Acesso privado</span>
+          <span>⚡ Liberação rápida</span>
+          <span>🔥 Conteúdo exclusivo</span>
+        </div>
+
+        <div class="auth-preview-card">
+          <p class="auth-preview-mini">Área protegida</p>
+          <h3>Login rápido e visual premium</h3>
+          <p>
+            Entre para acessar sua conta, acompanhar sua assinatura e liberar seus conteúdos.
+          </p>
+        </div>
+      </div>
+
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <button class="auth-tab active" type="button" data-tab="login">Entrar</button>
+          <button class="auth-tab" type="button" data-tab="cadastro">Criar conta</button>
+        </div>
+
+        <div class="auth-message" id="auth-message" style="display:none;"></div>
+
+        <div class="auth-panel active" id="login-panel">
+          <h3 class="auth-panel-title">Bem-vindo de volta</h3>
+          <p class="auth-panel-text">Entre com seu e-mail e senha para continuar.</p>
+
+          <form class="auth-form" id="login-form">
+            <div class="auth-field">
+              <label for="login-email">E-mail</label>
+              <input type="email" id="login-email" placeholder="seuemail@email.com" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="login-senha">Senha</label>
+              <input type="password" id="login-senha" placeholder="Digite sua senha" required>
+            </div>
+
+            <div class="auth-row">
+              <label class="auth-check">
+                <input type="checkbox" id="lembrar-login">
+                <span>Lembrar de mim</span>
+              </label>
+
+              <a href="#" class="auth-link" id="forgot-password-link">Esqueci minha senha</a>
+            </div>
+
+            <button type="submit" class="btn principal auth-submit" id="login-btn">Entrar agora</button>
+          </form>
+        </div>
+
+        <div class="auth-panel" id="cadastro-panel">
+          <h3 class="auth-panel-title">Criar nova conta</h3>
+          <p class="auth-panel-text">Preencha seus dados para criar seu acesso.</p>
+
+          <form class="auth-form" id="cadastro-form">
+            <div class="auth-field">
+              <label for="cadastro-nome">Nome</label>
+              <input type="text" id="cadastro-nome" placeholder="Seu nome" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="cadastro-email">E-mail</label>
+              <input type="email" id="cadastro-email" placeholder="seuemail@email.com" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="cadastro-senha">Senha</label>
+              <input type="password" id="cadastro-senha" placeholder="Crie uma senha" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="cadastro-confirmar">Confirmar senha</label>
+              <input type="password" id="cadastro-confirmar" placeholder="Repita sua senha" required>
+            </div>
+
+            <label class="auth-check auth-check-full">
+              <input type="checkbox" id="cadastro-termos" required>
+              <span>Concordo com os termos de acesso e política da plataforma</span>
+            </label>
+
+            <button type="submit" class="btn principal auth-submit" id="cadastro-btn">Criar conta</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <h2>Júlia<span>Privé</span></h2>
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = "https://ndazcilxpjyenkymqltc.supabase.co";
+  const supabaseKey = "sb_publishable_bAojqWTshY-UjOb_Q-0wnw_FuZ-MjC9";
+  const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  const authTabs = document.querySelectorAll(".auth-tab");
+  const loginPanel = document.getElementById("login-panel");
+  const cadastroPanel = document.getElementById("cadastro-panel");
+  const authMessage = document.getElementById("auth-message");
+  const loginForm = document.getElementById("login-form");
+  const cadastroForm = document.getElementById("cadastro-form");
+  const loginBtn = document.getElementById("login-btn");
+  const cadastroBtn = document.getElementById("cadastro-btn");
+  const forgotPasswordLink = document.getElementById("forgot-password-link");
+
+  function showMessage(text, type = "error") {
+    authMessage.innerHTML = text;
+    authMessage.style.display = "block";
+    authMessage.style.marginBottom = "16px";
+    authMessage.style.padding = "12px 14px";
+    authMessage.style.borderRadius = "12px";
+    authMessage.style.fontSize = "14px";
+    authMessage.style.lineHeight = "1.5";
+
+    if (type === "success") {
+      authMessage.style.background = "rgba(46, 204, 113, 0.12)";
+      authMessage.style.border = "1px solid rgba(46, 204, 113, 0.35)";
+      authMessage.style.color = "#8ef0b2";
+    } else {
+      authMessage.style.background = "rgba(231, 76, 60, 0.12)";
+      authMessage.style.border = "1px solid rgba(231, 76, 60, 0.35)";
+      authMessage.style.color = "#ff9a8f";
+    }
+  }
+
+  function clearMessage() {
+    authMessage.style.display = "none";
+    authMessage.innerHTML = "";
+  }
+
+  function setLoading(button, isLoading, loadingText, normalText) {
+    button.disabled = isLoading;
+    button.textContent = isLoading ? loadingText : normalText;
+    button.style.opacity = isLoading ? "0.7" : "1";
+    button.style.cursor = isLoading ? "not-allowed" : "pointer";
+  }
+
+  function activateTab(tabName) {
+    authTabs.forEach((item) => item.classList.remove("active"));
+
+    if (tabName === "login") {
+      document.querySelector('[data-tab="login"]').classList.add("active");
+      loginPanel.classList.add("active");
+      cadastroPanel.classList.remove("active");
+    } else {
+      document.querySelector('[data-tab="cadastro"]').classList.add("active");
+      cadastroPanel.classList.add("active");
+      loginPanel.classList.remove("active");
+    }
+
+    clearMessage();
+  }
+
+  authTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activateTab(tab.dataset.tab);
+    });
+  });
+
+  async function salvarPerfil(user, nome) {
+    const payload = {
+      id: user.id,
+      email: user.email,
+      nome: nome
+    };
+
+    const { error } = await supabaseClient
+      .from("profiles")
+      .upsert(payload, { onConflict: "id" });
+
+    if (error) {
+      throw error;
+    }
+  }
+
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearMessage();
+
+    const email = document.getElementById("login-email").value.trim();
+    const senha = document.getElementById("login-senha").value;
+
+    if (!email || !senha) {
+      showMessage("Preencha e-mail e senha.");
+      return;
+    }
+
+    try {
+      setLoading(loginBtn, true, "Entrando...", "Entrar agora");
+
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password: senha
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user && data.user.email_confirmed_at) {
+        showMessage("Login realizado com sucesso. Redirecionando...", "success");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      } else {
+        await supabaseClient.auth.signOut();
+        showMessage("Você precisa confirmar seu e-mail antes de entrar.");
+      }
+    } catch (error) {
+      showMessage(error.message || "Não foi possível fazer login.");
+    } finally {
+      setLoading(loginBtn, false, "Entrando...", "Entrar agora");
+    }
+  });
+
+  cadastroForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearMessage();
+
+    const nome = document.getElementById("cadastro-nome").value.trim();
+    const email = document.getElementById("cadastro-email").value.trim();
+    const senha = document.getElementById("cadastro-senha").value;
+    const confirmar = document.getElementById("cadastro-confirmar").value;
+    const termos = document.getElementById("cadastro-termos").checked;
+
+    if (!nome || !email || !senha || !confirmar) {
+      showMessage("Preencha todos os campos do cadastro.");
+      return;
+    }
+
+    if (!termos) {
+      showMessage("Você precisa concordar com os termos para criar a conta.");
+      return;
+    }
+
+    if (senha.length < 6) {
+      showMessage("A senha precisa ter pelo menos 6 caracteres.");
+      return;
+    }
+
+    if (senha !== confirmar) {
+      showMessage("As senhas não coincidem.");
+      return;
+    }
+
+    try {
+      setLoading(cadastroBtn, true, "Criando conta...", "Criar conta");
+
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password: senha,
+        options: {
+          data: {
+            nome: nome
+          }
+        }
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user) {
+        await salvarPerfil(data.user, nome);
+      }
+
+      if (data.session) {
+        showMessage("Conta criada com sucesso. Redirecionando...", "success");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      } else {
+        showMessage(
+          `Conta criada com sucesso! ✅<br><br>
+          Enviamos um e-mail de confirmação.<br>
+          Abra sua caixa de entrada e clique no link para ativar sua conta.<br><br>
+          ⚠️ Verifique também a pasta spam.`,
+          "success"
+        );
+
+        cadastroForm.reset();
+        activateTab("login");
+      }
+    } catch (error) {
+      showMessage(error.message || "Não foi possível criar a conta.");
+    } finally {
+      setLoading(cadastroBtn, false, "Criando conta...", "Criar conta");
+    }
+  });
+
+  forgotPasswordLink.addEventListener("click", async (event) => {
+    event.preventDefault();
+    clearMessage();
+
+    const email = document.getElementById("login-email").value.trim();
+
+    if (!email) {
+      showMessage("Digite seu e-mail no campo de login para recuperar a senha.");
+      return;
+    }
+
+    try {
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + "/login.html"
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      showMessage("Enviamos o link de recuperação para seu e-mail.", "success");
+    } catch (error) {
+      showMessage(error.message || "Não foi possível enviar o e-mail de recuperação.");
+    }
+  });
+
+  async function verificarSessao() {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error) return;
+
+    if (data.session) {
+      window.location.href = "index.html";
+    }
+  }
+
+  verificarSessao();
+</script>
+
+</body>
+</html>
