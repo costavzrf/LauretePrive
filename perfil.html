@@ -83,7 +83,6 @@
         </div>
 
         <div class="perfil-grid">
-
           <div class="perfil-main">
             <div class="perfil-stats-grid">
 
@@ -191,7 +190,6 @@
               </div>
             </div>
           </aside>
-
         </div>
       </div>
     </div>
@@ -267,16 +265,11 @@
   function getInitials(name, email) {
     if (name && name.trim()) {
       const parts = name.trim().split(" ").filter(Boolean);
-      if (parts.length === 1) {
-        return parts[0].slice(0, 2).toUpperCase();
-      }
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
       return (parts[0][0] + parts[1][0]).toUpperCase();
     }
 
-    if (email) {
-      return email.slice(0, 2).toUpperCase();
-    }
-
+    if (email) return email.slice(0, 2).toUpperCase();
     return "JP";
   }
 
@@ -308,9 +301,10 @@
       .from("profiles")
       .select("id, nome, email, avatar_url")
       .eq("id", userId)
-      .single();
+      .maybeSingle();
 
     if (error) {
+      console.error("Erro ao buscar perfil:", error);
       return null;
     }
 
@@ -326,8 +320,8 @@
 
     editNomeInput.value = nome;
     editAvatarInput.value = "";
-
     preencherAvatar(perfilAvatarPreview, nome, email, avatarUrl);
+
     perfilModalOverlay.classList.add("ativo");
   }
 
@@ -354,15 +348,17 @@
 
   async function uploadAvatar(userId, file) {
     const extensao = file.name.split(".").pop()?.toLowerCase() || "jpg";
-    const nomeArquivo = `${userId}-${Date.now()}.${extensao}`;
+    const nomeArquivo = `avatar-${userId}-${Date.now()}.${extensao}`;
 
     const { error: uploadError } = await supabaseClient.storage
       .from("avatars")
       .upload(nomeArquivo, file, {
-        upsert: true
+        upsert: true,
+        contentType: file.type
       });
 
     if (uploadError) {
+      console.error("Erro no upload:", uploadError);
       throw uploadError;
     }
 
@@ -381,13 +377,10 @@
       return;
     }
 
-    const user = data.user;
-    const profile = await buscarPerfil(user.id);
+    usuarioAtual = data.user;
+    perfilAtual = await buscarPerfil(usuarioAtual.id);
 
-    usuarioAtual = user;
-    perfilAtual = profile;
-
-    preencherPerfil(user, profile);
+    preencherPerfil(usuarioAtual, perfilAtual);
 
     perfilLoading.style.display = "none";
     perfilContent.style.display = "block";
@@ -432,22 +425,31 @@
         avatarUrl = await uploadAvatar(usuarioAtual.id, novoAvatar);
       }
 
-      const { error } = await supabaseClient
+      const payload = {
+        id: usuarioAtual.id,
+        email: usuarioAtual.email || null,
+        nome: novoNome || "Cliente",
+        avatar_url: avatarUrl
+      };
+
+      const { data, error } = await supabaseClient
         .from("profiles")
-        .update({
-          nome: novoNome || "Cliente",
-          avatar_url: avatarUrl
-        })
-        .eq("id", usuarioAtual.id);
+        .upsert(payload, { onConflict: "id" })
+        .select()
+        .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Erro ao salvar perfil:", error);
+        throw error;
+      }
 
-      perfilAtual = await buscarPerfil(usuarioAtual.id);
+      perfilAtual = data;
       preencherPerfil(usuarioAtual, perfilAtual);
       fecharModalEditarPerfil();
+      alert("Perfil atualizado com sucesso!");
     } catch (error) {
+      console.error("Erro final ao salvar perfil:", error);
       alert("Não foi possível salvar as alterações do perfil.");
-      console.error(error);
     } finally {
       salvarPerfilBtn.disabled = false;
       salvarPerfilBtn.textContent = "Salvar alterações";
