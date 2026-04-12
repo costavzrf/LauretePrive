@@ -1,33 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Júlia Privé | Amostras</title>
+  <title>Laurete Privé | Amostras</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="header">
-    <div class="container nav">
-      <h1 class="logo">
-        <a href="index.html">Júlia<span>Privé</span></a>
-      </h1>
+ <header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html">Laurete<span>Privé</span></a>
+    </h1>
 
-      <nav>
-        <ul class="menu">
-          <li><a href="index.html">Início</a></li>
-          <li><a href="amostras.html" class="ativo">Amostras</a></li>
-          <li><a href="packs.html">Packs</a></li>
-          <li><a href="vip.html">VIP</a></li>
-          <li><a href="perfil.html">Perfil</a></li>
-        </ul>
-      </nav>
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html" class="ativo">Amostras</a></li>
+        <li><a href="packs.html">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
 
-      <a href="vip.html" class="btn btn-topo">Assinar</a>
+    <div class="nav-actions">
+      <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
+
+      <!-- BOTÃO DARK MODE -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </header>
+  </div>
 
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="vip.html" class="mobile-menu-cta">Assinar</a>
+    </div>
+  </div>
+</header>
   <main class="amostras-page">
     <section class="amostras-topo">
       <div class="container">
@@ -202,13 +230,37 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-content">
-      <h2>Júlia<span>Privé</span></h2>
-      <p>Plataforma exclusiva para maiores de 18 anos.</p>
-      <p class="copy">© 2026</p>
+  <footer class="footer footer-soft footer-refined">
+  <div class="container footer-refined-grid">
+
+    <div class="footer-brand">
+      <h2>Laurete<span>Privé</span></h2>
+      <p>Experiência exclusiva para maiores de 18 anos, com acesso organizado, packs e área VIP.</p>
     </div>
-  </footer>
+
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Acesso rápido</h4>
+      <a href="https://discord.gg/SEU_LINK" target="_blank">Discord</a>
+      <a href="https://t.me/SEU_LINK" target="_blank">Telegram</a>
+      <a href="vip.html">Assinar agora</a>
+    </div>
+
+  </div>
+
+  <div class="container footer-bottom">
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
 
   <script src="script.js"></script>
 </body>

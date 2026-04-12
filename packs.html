@@ -1,132 +1,273 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Júlia Privé | Packs</title>
+  <title>Laurete Privé | Packs</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="header">
-    <div class="container nav">
-      <h1 class="logo">
-        <a href="index.html">Júlia<span>Privé</span></a>
-      </h1>
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html">Laurete<span>Privé</span></a>
+    </h1>
 
-      <nav>
-        <ul class="menu">
-          <li><a href="index.html">Início</a></li>
-          <li><a href="amostras.html">Amostras</a></li>
-          <li><a href="packs.html" class="ativo">Packs</a></li>
-          <li><a href="vip.html">VIP</a></li>
-          <li><a href="perfil.html">Perfil</a></li>
-        </ul>
-      </nav>
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html">Amostras</a></li>
+        <li><a href="packs.html" class="ativo">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
 
-      <a href="vip.html" class="btn btn-topo">Assinar</a>
+    <div class="nav-actions">
+      <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </header>
+  </div>
 
-  <main class="packs-final-page">
-    <section class="packs-final-hero">
-      <div class="container">
-        <p class="tag">Packs</p>
-        <h2 class="page-title">Escolha o pack ideal para você</h2>
-        <p class="desc center">
-          Acesso rápido, organizado e pensado pra quem quer entrar direto no conteúdo.
-        </p>
-      </div>
-    </section>
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
 
-    <section class="packs-final-section">
-      <div class="container">
-        <div class="packs-final-grid">
+      <div class="mobile-menu-divider"></div>
 
-          <article class="packs-final-card">
-            <span class="packs-final-chip bronze-chip-pack">Bronze</span>
-            <h3>Pack Bronze</h3>
-            <p class="packs-final-price">R$ 9,90</p>
-            <p class="packs-final-sub">Entrada simples pra começar.</p>
+      <a href="vip.html" class="mobile-menu-cta">Assinar</a>
+    </div>
+  </div>
+</header>
 
-            <ul class="packs-final-list">
+<main class="packs-curated-page">
+  <section class="packs-curated-hero">
+    <div class="container">
+      <p class="tag">Packs</p>
+      <h2 class="page-title">Escolha a experiência ideal para você</h2>
+      <p class="desc center">
+        Conteúdos organizados em opções de entrada, destaque e acesso mais completo.
+      </p>
+    </div>
+  </section>
+
+  <section class="packs-curated-section">
+    <div class="container">
+
+      <!-- CARD PRINCIPAL -->
+      <article class="pack-curated-card pack-curated-featured">
+        <span class="pack-curated-corner">Destaque</span>
+
+        <div class="pack-curated-head">
+          <div class="pack-curated-title-wrap">
+            <div class="pack-curated-icon">✦</div>
+            <div>
+              <div class="pack-curated-topline">
+                <h3>Pack Gold</h3>
+                <span class="pack-curated-pill">Mais pedido</span>
+              </div>
+              <p>
+                Uma opção mais equilibrada pra quem quer bastante conteúdo sem ir direto pro mais completo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pack-curated-details">
+          <p class="pack-curated-label">Detalhes:</p>
+
+          <ul class="pack-curated-list">
+            <li>Mais conteúdo e melhor percepção de valor</li>
+            <li>Equilíbrio ideal entre preço e entrega</li>
+            <li>Escolha mais natural pra maioria</li>
+            <li>Acesso rápido e organizado</li>
+          </ul>
+        </div>
+
+        <div class="pack-curated-footer">
+          <div>
+            <p class="pack-curated-price-label">Preço:</p>
+          </div>
+          <strong class="pack-curated-price">R$ 29,90</strong>
+        </div>
+
+        <a href="#" class="pack-curated-btn">Entrar no Gold</a>
+      </article>
+
+      <!-- GRID INFERIOR -->
+      <div class="packs-curated-grid">
+
+        <article class="pack-curated-card">
+          <div class="pack-curated-head">
+            <div class="pack-curated-title-wrap">
+              <div class="pack-curated-icon">◈</div>
+              <div>
+                <div class="pack-curated-topline">
+                  <h3>Pack Bronze</h3>
+                </div>
+                <p>
+                  Entrada simples pra começar e acessar uma seleção inicial.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pack-curated-details">
+            <p class="pack-curated-label">Detalhes:</p>
+
+            <ul class="pack-curated-list">
               <li>Conteúdo inicial selecionado</li>
               <li>Acesso rápido e direto</li>
               <li>Ideal pra primeira compra</li>
             </ul>
+          </div>
 
-            <a href="#" class="btn principal packs-final-btn">Começar agora</a>
-          </article>
+          <div class="pack-curated-footer">
+            <div>
+              <p class="pack-curated-price-label">Preço:</p>
+            </div>
+            <strong class="pack-curated-price">R$ 9,90</strong>
+          </div>
 
-          <article class="packs-final-card">
-            <span class="packs-final-chip prata-chip-pack">Prata</span>
-            <h3>Pack Prata</h3>
-            <p class="packs-final-price">R$ 19,90</p>
-            <p class="packs-final-sub">Mais conteúdo, mais valor.</p>
+          <a href="#" class="pack-curated-btn pack-curated-btn-soft">Começar agora</a>
+        </article>
 
-            <ul class="packs-final-list">
+        <article class="pack-curated-card">
+          <span class="pack-curated-mini-badge">Escolha segura</span>
+
+          <div class="pack-curated-head">
+            <div class="pack-curated-title-wrap">
+              <div class="pack-curated-icon">✧</div>
+              <div>
+                <div class="pack-curated-topline">
+                  <h3>Pack Prata</h3>
+                </div>
+                <p>
+                  Mais variedade e uma experiência melhor que a entrada inicial.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pack-curated-details">
+            <p class="pack-curated-label">Detalhes:</p>
+
+            <ul class="pack-curated-list">
               <li>Mais variedade que o Bronze</li>
               <li>Experiência mais completa</li>
               <li>Melhor evolução de custo</li>
             </ul>
+          </div>
 
-            <a href="#" class="btn principal packs-final-btn">Quero mais acesso</a>
-          </article>
+          <div class="pack-curated-footer">
+            <div>
+              <p class="pack-curated-price-label">Preço:</p>
+            </div>
+            <strong class="pack-curated-price">R$ 19,90</strong>
+          </div>
 
-          <article class="packs-final-card packs-final-gold">
-            <span class="packs-final-badge">Mais escolhido 🔥</span>
-            <span class="packs-final-chip gold-chip-pack">Gold</span>
-            <h3>Pack Gold</h3>
-            <p class="packs-final-price">R$ 29,90</p>
-            <p class="packs-final-sub packs-final-sub-strong">
-              Mais escolhido por quem quer o melhor custo-benefício.
-            </p>
+          <a href="#" class="pack-curated-btn pack-curated-btn-soft">Quero mais acesso</a>
+        </article>
 
-            <ul class="packs-final-list">
-              <li>Mais conteúdo e melhor percepção de valor</li>
-              <li>Equilíbrio ideal entre preço e entrega</li>
-              <li>Escolha mais natural pra maioria</li>
-            </ul>
+        <article class="pack-curated-card">
+          <span class="pack-curated-mini-badge">Completo</span>
 
-            <a href="#" class="btn principal packs-final-btn">Entrar no Gold</a>
-          </article>
+          <div class="pack-curated-head">
+            <div class="pack-curated-title-wrap">
+              <div class="pack-curated-icon">✷</div>
+              <div>
+                <div class="pack-curated-topline">
+                  <h3>Pack Premium</h3>
+                </div>
+                <p>
+                  A versão mais completa pra quem quer uma entrega mais ampla.
+                </p>
+              </div>
+            </div>
+          </div>
 
-          <article class="packs-final-card">
-            <span class="packs-final-chip premium-chip-pack">Premium</span>
-            <h3>Pack Premium</h3>
-            <p class="packs-final-price">R$ 49,90</p>
-            <p class="packs-final-sub">Experiência completa.</p>
+          <div class="pack-curated-details">
+            <p class="pack-curated-label">Detalhes:</p>
 
-            <ul class="packs-final-list">
+            <ul class="pack-curated-list">
               <li>Conteúdo mais completo</li>
               <li>Experiência exclusiva</li>
               <li>Conteúdos não disponíveis nos outros packs</li>
             </ul>
+          </div>
 
-            <a href="#" class="btn principal packs-final-btn">Quero tudo</a>
-          </article>
+          <div class="pack-curated-footer">
+            <div>
+              <p class="pack-curated-price-label">Preço:</p>
+            </div>
+            <strong class="pack-curated-price">R$ 49,90</strong>
+          </div>
 
-        </div>
+          <a href="#" class="pack-curated-btn pack-curated-btn-soft">Quero tudo</a>
+        </article>
 
-        <div class="packs-final-info">
-          <h4>Qual escolher?</h4>
-          <p>
-            Se quiser começar, o Bronze resolve. Se quer algo mais completo, o Prata já melhora bastante.
-            Mas o <strong>Gold é o equilíbrio perfeito</strong> entre valor e conteúdo. Já o Premium é pra quem quer tudo liberado.
-          </p>
-        </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container footer-content">
-      <h2>Júlia<span>Privé</span></h2>
-      <p>Plataforma exclusiva para maiores de 18 anos.</p>
-      <p class="copy">© 2026 - Todos os direitos reservados.</p>
+      <div class="packs-curated-info">
+        <h4>Qual escolher?</h4>
+        <p>
+          O <strong>Bronze</strong> é a entrada mais simples. O <strong>Prata</strong> já entrega uma experiência melhor.
+          O <strong>Gold</strong> é o ponto de equilíbrio entre valor e conteúdo. Já o <strong>Premium</strong> é pra quem quer a versão mais completa.
+        </p>
+      </div>
+
     </div>
-  </footer>
+  </section>
+</main>
 
-  <script src="script.js"></script>
+<footer class="footer footer-soft footer-refined">
+  <div class="container footer-refined-grid">
+
+    <div class="footer-brand">
+      <h2>Laurete<span>Privé</span></h2>
+      <p>Experiência exclusiva para maiores de 18 anos, com acesso organizado, packs e área VIP.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Acesso rápido</h4>
+      <a href="https://discord.gg/SEU_LINK" target="_blank">Discord</a>
+      <a href="https://t.me/SEU_LINK" target="_blank">Telegram</a>
+      <a href="vip.html">Assinar agora</a>
+    </div>
+
+  </div>
+
+  <div class="container footer-bottom">
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

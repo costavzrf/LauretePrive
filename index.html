@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Júlia Privé | Início</title>
+  <meta name="theme-color" content="#f7b3cb" />
+  <title>Laurete Privé | Início</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<header class="header">
-  <div class="container nav">
-    <h1 class="logo">
-      <a href="index.html">Júlia<span>Privé</span></a>
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html">Laurete<span>Privé</span></a>
     </h1>
 
-    <nav>
-      <ul class="menu">
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
         <li><a href="index.html" class="ativo">Início</a></li>
         <li><a href="amostras.html">Amostras</a></li>
         <li><a href="packs.html">Packs</a></li>
@@ -24,59 +25,108 @@
       </ul>
     </nav>
 
-    <a href="vip.html" class="btn btn-topo">Assinar</a>
+    <div class="nav-actions">
+      <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="vip.html" class="mobile-menu-cta">Assinar</a>
+    </div>
   </div>
 </header>
 
-<main>
-  <section class="hero hero-premium">
-    <div class="container hero-content hero-premium-grid">
+<main class="home-soft-page">
+  <section class="home-soft-hero home-soft-hero-v2">
+    <div class="container home-soft-grid-v2">
 
-      <div class="hero-text hero-premium-text">
-        <p class="hero-mini">Prazer, essa sou eu</p>
+      <div class="home-soft-text-v2">
+        <p class="home-soft-pill">♡ Área exclusiva</p>
 
-        <h2 class="hero-premium-title">
-          Acesso direto aos <span>conteúdos exclusivos 🔥</span>
+        <h2 class="home-soft-title-v2">
+          Um espaço mais <br>
+          <span>delicado, privado e exclusivo</span>
         </h2>
 
-        <h3 class="hero-premium-subtitle">
-          Conteúdos privados, organizados e liberados de forma rápida pra quem quer algo mais próximo.
-        </h3>
+        <p class="home-soft-desc-v2">
+          A Laurete Privé reúne prévias, packs e acesso VIP em uma experiência mais bonita,
+          organizada e feita pra quem quer entrar direto no conteúdo sem complicação.
+        </p>
 
-<p class="hero-mini-info">
-  🔒 Privado • ⚡ Rápido • 🔥 Exclusivo
-</p>
-        <div class="hero-premium-actions">
-          <a href="packs.html" class="btn principal hero-cta-main">Ver packs</a>
-
-          <div class="hero-cta-secondary">
-            <a href="amostras.html" class="btn secundario">Ver amostras</a>
-            <a href="vip.html" class="btn terciario">Área VIP</a>
-          </div>
+        <div class="home-soft-actions">
+          <a href="vip.html" class="btn btn-gradient-soft">Assinar agora</a>
+          <a href="amostras.html" class="btn btn-outline-soft">Ver amostras</a>
         </div>
 
-        <div class="hero-mobile-extra">
-          <p class="hero-proof">🔥 Conteúdos atualizados com frequência</p>
+        <div class="home-links-boxes">
+          <a href="https://discord.gg/SEU_LINK" target="_blank" class="home-link-card">
+            <div class="home-link-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.317 4.369A19.791 19.791 0 0 0 15.885 3c-.191.346-.403.81-.552 1.176a18.27 18.27 0 0 0-5.666 0A11.64 11.64 0 0 0 9.115 3a19.736 19.736 0 0 0-4.433 1.369C1.533 9.045.427 13.579.8 18.057a19.9 19.9 0 0 0 6.077 3.07c.492-.667.93-1.37 1.304-2.107a12.948 12.948 0 0 1-2.05-.976c.172-.13.34-.265.503-.404 3.946 1.824 8.233 1.824 12.134 0 .164.139.332.274.503.404a12.936 12.936 0 0 1-2.051.976c.374.737.812 1.44 1.304 2.107a19.897 19.897 0 0 0 6.078-3.07c.44-5.177-.75-9.668-3.285-13.688ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.955-2.419 2.157-2.419 1.212 0 2.167 1.095 2.157 2.419 0 1.334-.955 2.419-2.157 2.419Zm7.96 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.955-2.419 2.157-2.419 1.212 0 2.167 1.095 2.157 2.419 0 1.334-.945 2.419-2.157 2.419Z"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Discord</h3>
+              <p>Entre para ver amostras e acessar conteúdo exclusivo</p>
+            </div>
+          </a>
 
-          <div class="hero-social hero-social-mobile">
-            <a href="https://t.me/SEU_LINK_AQUI" target="_blank">Telegram</a>
-            <a href="https://discord.gg/SEU_LINK_AQUI" target="_blank">Discord</a>
-          </div>
+          <a href="https://t.me/SEU_LINK" target="_blank" class="home-link-card">
+            <div class="home-link-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21.944 4.516a1.5 1.5 0 0 0-1.72-.213L2.792 12.344a1.5 1.5 0 0 0 .165 2.767l4.323 1.497 1.624 5.221a1.5 1.5 0 0 0 2.613.532l2.43-2.968 4.694 3.454a1.5 1.5 0 0 0 2.36-.92l2.41-15.76a1.5 1.5 0 0 0-.467-1.651ZM9.392 16.262l-.956 3.076-.981-3.155 8.648-6.688-6.711 6.767Zm9.81 3.125-4.24-3.12a1.5 1.5 0 0 0-2.042.234l-1.516 1.851.817-2.629 6.675-6.73a1 1 0 0 0-1.245-1.56L5.369 14.52l-1.431-.495 15.573-7.183-2.309 12.545Z"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Telegram</h3>
+              <p>Receba conteúdos e atualizações direto no seu celular</p>
+            </div>
+          </a>
         </div>
       </div>
 
-      <div class="hero-image-wrap hero-premium-image-wrap">
-        <div class="hero-premium-card">
-          <div class="hero-premium-image">
-            <video class="hero-video" autoplay muted loop playsinline>
-              <source src="lau5 (1).mp4" type="video/mp4">
-            </video>
+      <div class="home-media-montage">
+        <div class="montage-main-card">
+          <div class="montage-floating-badge">
+            <strong>Laurete Privé</strong>
+            <span>Amostras, packs e acesso VIP</span>
+          </div>
 
-            <div class="hero-preview-overlay">
-              <p class="hero-preview-tag">Preview premium</p>
-              <h4>Conteúdo disponível nos packs</h4>
-              <span>Acesso privado • visual premium</span>
-            </div>
+          <video class="montage-main-video" autoplay muted loop playsinline>
+            <source src="lau5 (1).mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="montage-side-grid">
+          <div class="montage-mini-card">
+            <div class="montage-mini-placeholder">Mídia 02</div>
+          </div>
+
+          <div class="montage-mini-card">
+            <div class="montage-mini-placeholder">Mídia 03</div>
+          </div>
+
+          <div class="montage-mini-card montage-mini-wide">
+            <div class="montage-mini-placeholder">Mídia 04</div>
           </div>
         </div>
       </div>
@@ -85,9 +135,9 @@
   </section>
 </main>
 
-<footer class="footer">
+<footer class="footer footer-soft">
   <div class="container footer-content">
-    <h2>Júlia<span>Privé</span></h2>
+    <h2>Laurete<span>Privé</span></h2>
     <p>Plataforma exclusiva para maiores de 18 anos.</p>
     <p class="copy">© 2026 - Todos os direitos reservados.</p>
   </div>

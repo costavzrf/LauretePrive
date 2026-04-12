@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Júlia Privé | Login</title>
+  <title>Laurete Privé | Login</title>
   <link rel="stylesheet" href="style.css"/>
 
    <style>
@@ -15,22 +18,49 @@
 </head>
 <body>
 
-<header class="header">
-  <div class="container nav">
-    <h1 class="logo">
-      <a href="index.html">Júlia<span>Privé</span></a>
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html">Laurete<span>Privé</span></a>
     </h1>
 
-    <nav>
-      <ul class="menu">
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
         <li><a href="index.html">Início</a></li>
         <li><a href="amostras.html">Amostras</a></li>
         <li><a href="packs.html">Packs</a></li>
         <li><a href="vip.html">VIP</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
       </ul>
     </nav>
 
-    <a href="login.html" class="btn btn-topo">Entrar</a>
+    <div class="nav-actions">
+      <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="vip.html" class="mobile-menu-cta">Assinar</a>
+    </div>
   </div>
 </header>
 
@@ -46,11 +76,12 @@
           em uma experiência mais organizada e premium.
         </p>
 
-        <div class="auth-points">
-          <span>🔒 Acesso privado</span>
-          <span>⚡ Liberação rápida</span>
-          <span>🔥 Conteúdo exclusivo</span>
-        </div>
+<div class="hero-mini-info-chips">
+  <span>🔒 Acesso privado</span>
+  <span>⚡ Liberação rápida</span>
+  <span>🔥 Conteúdo exclusivo</span>
+</div>
+
 
         <div class="auth-preview-card">
           <p class="auth-preview-mini">Área protegida</p>
@@ -166,7 +197,7 @@
 
 <footer class="footer">
   <div class="container footer-content">
-    <h2>Júlia<span>Privé</span></h2>
+    <h2>Laurete<span>Privé</span></h2>
     <p>Plataforma exclusiva para maiores de 18 anos.</p>
     <p class="copy">© 2026 - Todos os direitos reservados.</p>
   </div>
@@ -507,6 +538,10 @@
     document.body.style.opacity = "1";
   });
 </script>
+
+<script src="script.js"></script>
+</body>
+</html>
 
 </body>
 </html>

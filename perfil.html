@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Júlia Privé | Meu Perfil</title>
+  <title>Laurete Privé | Meu Perfil</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<header class="header">
-  <div class="container nav">
-    <h1 class="logo">
-      <a href="index.html">Júlia<span>Privé</span></a>
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html">Laurete<span>Privé</span></a>
     </h1>
 
-    <nav>
-      <ul class="menu">
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
         <li><a href="index.html">Início</a></li>
         <li><a href="amostras.html">Amostras</a></li>
         <li><a href="packs.html">Packs</a></li>
@@ -24,7 +26,33 @@
       </ul>
     </nav>
 
-    <a href="perfil.html" class="btn btn-topo">Minha conta</a>
+    <div class="nav-actions">
+      <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="perfil.html">Perfil</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="vip.html" class="mobile-menu-cta">Assinar</a>
+    </div>
   </div>
 </header>
 
@@ -49,7 +77,7 @@
           </div>
 
           <div class="perfil-top-actions">
-            <button type="button" class="btn secundario" id="editar-perfil-btn" disabled>Editar perfil</button>
+            <button type="button" class="btn secundario" id="editar-perfil-btn">Editar perfil</button>
             <button type="button" class="btn terciario" id="logout-btn">Sair da conta</button>
           </div>
         </div>
@@ -172,11 +200,46 @@
 
 <footer class="footer">
   <div class="container footer-content">
-    <h2>Júlia<span>Privé</span></h2>
+    <h2>Laurete<span>Privé</span></h2>
     <p>Plataforma exclusiva para maiores de 18 anos.</p>
     <p class="copy">© 2026 - Todos os direitos reservados.</p>
   </div>
 </footer>
+
+<div class="perfil-modal-overlay" id="perfil-modal-overlay">
+  <div class="perfil-modal">
+    <div class="perfil-modal-top">
+      <div>
+        <p class="perfil-box-mini">Editar informações</p>
+        <h3>Editar perfil</h3>
+      </div>
+
+      <button type="button" class="perfil-modal-close" id="fechar-modal-perfil">✕</button>
+    </div>
+
+    <form id="perfil-edit-form" class="perfil-edit-form">
+      <div class="perfil-edit-preview">
+        <div class="perfil-avatar perfil-avatar-modal" id="perfil-avatar-preview">JP</div>
+      </div>
+
+      <div class="perfil-edit-field">
+        <label for="edit-nome">Nome</label>
+        <input type="text" id="edit-nome" name="nome" placeholder="Seu nome" />
+      </div>
+
+      <div class="perfil-edit-field">
+        <label for="edit-avatar">Foto de perfil</label>
+        <input type="file" id="edit-avatar" name="avatar" accept="image/*" />
+        <small>Envie JPG, PNG ou WEBP.</small>
+      </div>
+
+      <div class="perfil-edit-actions">
+        <button type="button" class="btn terciario" id="cancelar-modal-perfil">Cancelar</button>
+        <button type="submit" class="btn principal" id="salvar-perfil-btn">Salvar alterações</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -188,6 +251,18 @@
   const perfilContent = document.getElementById("perfil-content");
   const logoutBtn = document.getElementById("logout-btn");
   const editarPerfilBtn = document.getElementById("editar-perfil-btn");
+
+  const perfilModalOverlay = document.getElementById("perfil-modal-overlay");
+  const fecharModalPerfil = document.getElementById("fechar-modal-perfil");
+  const cancelarModalPerfil = document.getElementById("cancelar-modal-perfil");
+  const perfilEditForm = document.getElementById("perfil-edit-form");
+  const editNomeInput = document.getElementById("edit-nome");
+  const editAvatarInput = document.getElementById("edit-avatar");
+  const perfilAvatarPreview = document.getElementById("perfil-avatar-preview");
+  const salvarPerfilBtn = document.getElementById("salvar-perfil-btn");
+
+  let usuarioAtual = null;
+  let perfilAtual = null;
 
   function getInitials(name, email) {
     if (name && name.trim()) {
@@ -205,19 +280,22 @@
     return "JP";
   }
 
-  function formatCurrency(value) {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    }).format(value);
+  function preencherAvatar(element, nome, email, avatarUrl) {
+    if (!element) return;
+
+    if (avatarUrl) {
+      element.innerHTML = `<img src="${avatarUrl}" alt="Foto de perfil">`;
+    } else {
+      element.textContent = getInitials(nome, email);
+    }
   }
 
   function preencherPerfil(user, profile) {
     const nome = profile?.nome || user.user_metadata?.nome || "Cliente";
     const email = profile?.email || user.email || "E-mail não disponível";
-    const iniciais = getInitials(nome, email);
+    const avatarUrl = profile?.avatar_url || "";
 
-    document.getElementById("perfil-avatar").textContent = iniciais;
+    preencherAvatar(document.getElementById("perfil-avatar"), nome, email, avatarUrl);
     document.getElementById("perfil-nome").innerHTML = `${nome} <span>• Cliente</span>`;
     document.getElementById("perfil-email").textContent = email;
 
@@ -228,7 +306,7 @@
   async function buscarPerfil(userId) {
     const { data, error } = await supabaseClient
       .from("profiles")
-      .select("id, nome, email")
+      .select("id, nome, email, avatar_url")
       .eq("id", userId)
       .single();
 
@@ -237,6 +315,62 @@
     }
 
     return data;
+  }
+
+  function abrirModalPerfil() {
+    if (!usuarioAtual) return;
+
+    const nome = perfilAtual?.nome || usuarioAtual.user_metadata?.nome || "";
+    const email = perfilAtual?.email || usuarioAtual.email || "";
+    const avatarUrl = perfilAtual?.avatar_url || "";
+
+    editNomeInput.value = nome;
+    editAvatarInput.value = "";
+
+    preencherAvatar(perfilAvatarPreview, nome, email, avatarUrl);
+    perfilModalOverlay.classList.add("ativo");
+  }
+
+  function fecharModalEditarPerfil() {
+    perfilModalOverlay.classList.remove("ativo");
+  }
+
+  editAvatarInput.addEventListener("change", () => {
+    const file = editAvatarInput.files?.[0];
+    const nome = editNomeInput.value || perfilAtual?.nome || usuarioAtual?.user_metadata?.nome || "";
+    const email = perfilAtual?.email || usuarioAtual?.email || "";
+
+    if (!file) {
+      preencherAvatar(perfilAvatarPreview, nome, email, perfilAtual?.avatar_url || "");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      perfilAvatarPreview.innerHTML = `<img src="${e.target.result}" alt="Prévia do avatar">`;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  async function uploadAvatar(userId, file) {
+    const extensao = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    const nomeArquivo = `${userId}-${Date.now()}.${extensao}`;
+
+    const { error: uploadError } = await supabaseClient.storage
+      .from("avatars")
+      .upload(nomeArquivo, file, {
+        upsert: true
+      });
+
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    const { data } = supabaseClient.storage
+      .from("avatars")
+      .getPublicUrl(nomeArquivo);
+
+    return data.publicUrl;
   }
 
   async function carregarConta() {
@@ -249,6 +383,9 @@
 
     const user = data.user;
     const profile = await buscarPerfil(user.id);
+
+    usuarioAtual = user;
+    perfilAtual = profile;
 
     preencherPerfil(user, profile);
 
@@ -265,7 +402,56 @@
   });
 
   editarPerfilBtn.addEventListener("click", () => {
-    alert("A edição de perfil será liberada em breve.");
+    abrirModalPerfil();
+  });
+
+  fecharModalPerfil.addEventListener("click", fecharModalEditarPerfil);
+  cancelarModalPerfil.addEventListener("click", fecharModalEditarPerfil);
+
+  perfilModalOverlay.addEventListener("click", (e) => {
+    if (e.target === perfilModalOverlay) {
+      fecharModalEditarPerfil();
+    }
+  });
+
+  perfilEditForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!usuarioAtual) return;
+
+    const novoNome = editNomeInput.value.trim();
+    const novoAvatar = editAvatarInput.files?.[0];
+
+    salvarPerfilBtn.disabled = true;
+    salvarPerfilBtn.textContent = "Salvando...";
+
+    try {
+      let avatarUrl = perfilAtual?.avatar_url || null;
+
+      if (novoAvatar) {
+        avatarUrl = await uploadAvatar(usuarioAtual.id, novoAvatar);
+      }
+
+      const { error } = await supabaseClient
+        .from("profiles")
+        .update({
+          nome: novoNome || "Cliente",
+          avatar_url: avatarUrl
+        })
+        .eq("id", usuarioAtual.id);
+
+      if (error) throw error;
+
+      perfilAtual = await buscarPerfil(usuarioAtual.id);
+      preencherPerfil(usuarioAtual, perfilAtual);
+      fecharModalEditarPerfil();
+    } catch (error) {
+      alert("Não foi possível salvar as alterações do perfil.");
+      console.error(error);
+    } finally {
+      salvarPerfilBtn.disabled = false;
+      salvarPerfilBtn.textContent = "Salvar alterações";
+    }
   });
 
   carregarConta();
@@ -277,8 +463,6 @@
   });
 </script>
 
-</body>
-</html>
-
+<script src="script.js"></script>
 </body>
 </html>
