@@ -253,18 +253,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function buscarPerfil(userId) {
-    const client = await initSupabasePerfil();
-    if (!client) return null;
+  const client = await initSupabasePerfil();
+  if (!client) return null;
 
-    const { data, error } = await client
-      .from("profiles")
-      .select("id, nome, email, avatar_url")
-      .eq("id", userId)
-      .single();
+  const { data, error } = await client
+    .from("profiles")
+    .select("id, nome, avatar_url")
+    .eq("id", userId)
+    .maybeSingle();
 
-    if (error) return null;
-    return data;
+  if (error) {
+    console.error("Erro ao buscar perfil:", error);
+    return null;
   }
+
+  return data;
+}
 
   async function carregarUsuarioPerfil() {
     if (!editarPerfilBtn) return;
@@ -279,8 +283,28 @@ document.addEventListener("DOMContentLoaded", () => {
     usuarioAtual = data.user;
     perfilAtual = await buscarPerfil(usuarioAtual.id);
 
+    if (!perfilAtual) {
+      const { error: upsertError } = await client
+        .from("profiles")
+        .upsert(
+          {
+            id: usuarioAtual.id,
+            nome: usuarioAtual.user_metadata?.nome || "Cliente",
+            avatar_url: null
+          },
+          { onConflict: "id" }
+        );
+
+      if (upsertError) {
+        console.error("Erro ao criar perfil inicial:", upsertError);
+        return;
+      }
+
+      perfilAtual = await buscarPerfil(usuarioAtual.id);
+    }
+
     const nome = perfilAtual?.nome || usuarioAtual.user_metadata?.nome || "Cliente";
-    const email = perfilAtual?.email || usuarioAtual.email || "";
+    const email = usuarioAtual.email || "";
     const avatarUrl = perfilAtual?.avatar_url || "";
 
     if (perfilNome) {
@@ -299,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!usuarioAtual) return;
 
     const nome = perfilAtual?.nome || usuarioAtual.user_metadata?.nome || "";
-    const email = perfilAtual?.email || usuarioAtual.email || "";
+    const email = usuarioAtual.email || "";
     const avatarUrl = perfilAtual?.avatar_url || "";
 
     editNomeInput.value = nome;
@@ -324,7 +348,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const { error: uploadError } = await client.storage
       .from("avatars")
-      .upload(nomeArquivo, file, { upsert: true });
+      .upload(nomeArquivo, file, {
+        upsert: true,
+        contentType: file.type
+      });
 
     if (uploadError) throw uploadError;
 
@@ -361,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
     editAvatarInput.addEventListener("change", () => {
       const file = editAvatarInput.files?.[0];
       const nome = editNomeInput?.value || perfilAtual?.nome || usuarioAtual?.user_metadata?.nome || "";
-      const email = perfilAtual?.email || usuarioAtual?.email || "";
+      const email = usuarioAtual?.email || "";
 
       if (!file) {
         renderAvatar(perfilAvatarPreview, nome, email, perfilAtual?.avatar_url || "");
@@ -404,18 +431,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const { error } = await client
           .from("profiles")
-          .update({
-            nome: novoNome || "Cliente",
-            avatar_url: avatarUrl
-          })
-          .eq("id", usuarioAtual.id);
+          .upsert(
+            {
+              id: usuarioAtual.id,
+              nome: novoNome || "Cliente",
+              avatar_url: avatarUrl
+            },
+            { onConflict: "id" }
+          );
 
         if (error) throw error;
 
         perfilAtual = await buscarPerfil(usuarioAtual.id);
 
         const nomeAtualizado = perfilAtual?.nome || "Cliente";
-        const emailAtualizado = perfilAtual?.email || usuarioAtual.email || "";
+        const emailAtualizado = usuarioAtual.email || "";
         const avatarAtualizado = perfilAtual?.avatar_url || "";
 
         if (perfilNome) {
@@ -429,8 +459,8 @@ document.addEventListener("DOMContentLoaded", () => {
         renderAvatar(perfilAvatar, nomeAtualizado, emailAtualizado, avatarAtualizado);
         fecharModalEditarPerfil();
       } catch (error) {
-        console.error(error);
-        alert("Não foi possível salvar as alterações do perfil.");
+        console.error("ERRO AO SALVAR PERFIL:", error);
+        alert("ERRO AO SALVAR PERFIL:\n\n" + (error?.message || JSON.stringify(error)));
       } finally {
         if (salvarPerfilBtn) {
           salvarPerfilBtn.disabled = false;

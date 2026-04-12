@@ -6,14 +6,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const authTabs = document.querySelectorAll(".auth-tab");
   const loginPanel = document.getElementById("login-panel");
   const cadastroPanel = document.getElementById("cadastro-panel");
+
   const loginForm = document.getElementById("login-form");
   const cadastroForm = document.getElementById("cadastro-form");
+
   const loginBtn = document.getElementById("login-btn");
   const cadastroBtn = document.getElementById("cadastro-btn");
+
   const authMessage = document.getElementById("auth-message");
   const forgotPasswordLink = document.getElementById("forgot-password-link");
+
   const googleLoginBtn = document.getElementById("google-login-btn");
   const googleCadastroBtn = document.getElementById("google-cadastro-btn");
+
+  const LOGIN_PAGE = "login.html";
+  const PERFIL_PAGE = "perfil.html";
+
+  function buildPageUrl(fileName) {
+    return new URL(fileName, window.location.href).href;
+  }
 
   function showMessage(text, type = "error") {
     if (!authMessage) return;
@@ -64,11 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (tabName === "login") {
       const loginTab = document.querySelector('[data-tab="login"]');
       if (loginTab) loginTab.classList.add("active");
+
       if (loginPanel) loginPanel.classList.add("active");
       if (cadastroPanel) cadastroPanel.classList.remove("active");
     } else {
       const cadastroTab = document.querySelector('[data-tab="cadastro"]');
       if (cadastroTab) cadastroTab.classList.add("active");
+
       if (cadastroPanel) cadastroPanel.classList.add("active");
       if (loginPanel) loginPanel.classList.remove("active");
     }
@@ -94,22 +107,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function salvarPerfil(user, nomeManual = null) {
-    if (!user?.id) return;
+    if (!user?.id) {
+      throw new Error("Usuário inválido para salvar perfil.");
+    }
 
     const nome = nomeManual || extrairNomeDoUsuario(user);
 
+    const payload = {
+      id: user.id,
+      nome: nome
+    };
+
     const { error } = await supabaseClient
       .from("profiles")
-      .upsert(
-        {
-          id: user.id,
-          email: user.email,
-          nome: nome
-        },
-        { onConflict: "id" }
-      );
+      .upsert(payload, { onConflict: "id" });
 
-    if (error) throw error;
+    if (error) {
+      console.error("Erro ao salvar perfil:", error);
+      throw error;
+    }
   }
 
   function tratarErroLogin(error) {
@@ -117,6 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (msg.includes("invalid login credentials")) {
       return "E-mail ou senha incorretos.";
+    }
+
+    if (msg.includes("email not confirmed")) {
+      return "Você precisa confirmar seu e-mail antes de entrar.";
     }
 
     return error?.message || "Não foi possível fazer login.";
@@ -129,11 +149,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return "Muitas tentativas agora. Aguarde um pouco e tente novamente.";
     }
 
-    if (msg.includes("already") || msg.includes("registered")) {
+    if (msg.includes("already registered") || msg.includes("already") || msg.includes("registered")) {
       return "Esse e-mail já está cadastrado. Tente entrar ou recuperar sua senha.";
     }
 
     return error?.message || "Não foi possível criar a conta.";
+  }
+
+  async function redirecionarParaPerfil() {
+    window.location.href = buildPageUrl(PERFIL_PAGE);
   }
 
   if (loginForm) {
@@ -158,19 +182,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (error) throw error;
+        if (!data?.user) throw new Error("Usuário não retornado no login.");
 
-        if (data.user && data.user.email_confirmed_at) {
-          await salvarPerfil(data.user);
-          showMessage("Login realizado com sucesso. Redirecionando...", "success");
+        await salvarPerfil(data.user);
 
-          setTimeout(() => {
-            window.location.href = "perfil.html";
-          }, 1000);
-        } else {
-          await supabaseClient.auth.signOut();
-          showMessage("Você precisa confirmar seu e-mail antes de entrar.");
-        }
+        showMessage("Login realizado com sucesso. Redirecionando...", "success");
+
+        setTimeout(() => {
+          redirecionarParaPerfil();
+        }, 800);
       } catch (error) {
+        console.error("Erro no login:", error);
         showMessage(tratarErroLogin(error));
       } finally {
         setLoading(loginBtn, "Entrando...", "Entrar agora", false);
@@ -219,28 +241,25 @@ document.addEventListener("DOMContentLoaded", () => {
             data: {
               nome: nome
             },
-            emailRedirectTo: window.location.origin + "/login.html"
+            emailRedirectTo: buildPageUrl(LOGIN_PAGE)
           }
         });
 
         if (error) throw error;
 
-        if (data.user) {
+        if (data?.user) {
           await salvarPerfil(data.user, nome);
         }
 
-        if (data.session) {
+        if (data?.session) {
           showMessage("Conta criada com sucesso. Redirecionando...", "success");
 
           setTimeout(() => {
-            window.location.href = "perfil.html";
-          }, 1000);
+            redirecionarParaPerfil();
+          }, 800);
         } else {
           showMessage(
-            `Conta criada com sucesso! ✅<br><br>
-            Enviamos um e-mail de confirmação.<br>
-            Abra sua caixa de entrada e clique no link para ativar sua conta.<br><br>
-            ⚠️ Verifique também a pasta spam.`,
+            `Conta criada com sucesso. Verifique seu e-mail para confirmar a conta.`,
             "success"
           );
 
@@ -248,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
           activateTab("login");
         }
       } catch (error) {
+        console.error("Erro no cadastro:", error);
         showMessage(tratarErroCadastro(error));
       } finally {
         setLoading(cadastroBtn, "Criando conta...", "Criar conta", false);
@@ -269,13 +289,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin + "/login.html"
+          redirectTo: buildPageUrl(LOGIN_PAGE)
         });
 
         if (error) throw error;
 
         showMessage("Enviamos o link de recuperação para seu e-mail.", "success");
       } catch (error) {
+        console.error("Erro ao recuperar senha:", error);
         showMessage(error?.message || "Não foi possível enviar o e-mail de recuperação.");
       }
     });
@@ -285,14 +306,17 @@ document.addEventListener("DOMContentLoaded", () => {
     clearMessage();
     setGoogleLoading(button, true);
 
-    const { error } = await supabaseClient.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: window.location.origin + "/perfil.html"
-      }
-    });
+    try {
+      const { error } = await supabaseClient.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: buildPageUrl(PERFIL_PAGE)
+        }
+      });
 
-    if (error) {
+      if (error) throw error;
+    } catch (error) {
+      console.error("Erro com Google OAuth:", error);
       setGoogleLoading(button, false);
       showMessage(mensagemErro || "Não foi possível continuar com Google.");
     }
@@ -311,24 +335,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function verificarSessao() {
-    const { data } = await supabaseClient.auth.getSession();
+    try {
+      const { data, error } = await supabaseClient.auth.getSession();
 
-    if (data.session?.user) {
-      try {
+      if (error) throw error;
+
+      if (data?.session?.user) {
         await salvarPerfil(data.session.user);
-      } catch (error) {
+        await redirecionarParaPerfil();
       }
-
-      window.location.href = "perfil.html";
+    } catch (error) {
+      console.error("Erro ao verificar sessão:", error);
     }
   }
 
   supabaseClient.auth.onAuthStateChange(async (event, session) => {
-    if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
-      try {
+    try {
+      if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session?.user) {
         await salvarPerfil(session.user);
-      } catch (error) {
       }
+    } catch (error) {
+      console.error("Erro no onAuthStateChange:", error);
     }
   });
 
