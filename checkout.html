@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#14171d">
+  <title>Laurete Privé | Checkout</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="checkout-page">
+
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html" class="logo-wrap">
+        <span class="logo-lollipop">🍭</span>
+        Laurete<span>Privé</span>
+      </a>
+    </h1>
+
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html">Amostras</a></li>
+        <li><a href="packs.html">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="webnamoro.html">Webnamoro</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="vip.html" class="mobile-menu-cta">Assinar</a>
+    </div>
+  </div>
+</header>
+
+<main class="checkout-main">
+  <section class="checkout-hero">
+    <div class="container">
+      <div class="checkout-hero-box">
+        <div class="checkout-hero-icon">✓</div>
+
+        <div class="checkout-hero-text">
+          <p class="checkout-hero-mini">Checkout seguro</p>
+          <h2>Finalize seu pedido</h2>
+          <p>Você está a um passo de garantir seu conteúdo exclusivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="checkout-section">
+    <div class="container">
+
+      <div class="checkout-offer-timer">
+        <span class="checkout-timer-label">Esta oferta expira em:</span>
+        <strong id="checkoutCountdown">10:00</strong>
+      </div>
+
+      <div class="checkout-layout">
+
+        <div class="checkout-left">
+          <article class="checkout-panel">
+            <div class="checkout-panel-head">
+              <h3>Resumo do Pedido</h3>
+            </div>
+
+            <div class="checkout-product-row">
+              <div class="checkout-thumb">
+                <img id="checkoutImagem" src="pic.png" alt="Capa do produto">
+              </div>
+
+              <div class="checkout-product-info">
+                <h4 id="checkoutProduto">Produto</h4>
+                <p id="checkoutDescricao">Conteúdo exclusivo e sem censura</p>
+                <strong id="checkoutPreco">R$ 0,00</strong>
+              </div>
+            </div>
+
+            <div class="checkout-banner">
+              <video autoplay muted loop playsinline>
+                <source src="vid.mp4" type="video/mp4">
+              </video>
+
+              <div class="banner-blur"></div>
+
+              <div class="checkout-banner-content">
+                <span>DESBLOQUEIE AGORA</span>
+                <p>Conteúdo exclusivo</p>
+                <small>Liberado após pagamento</small>
+              </div>
+            </div>
+
+            <div class="checkout-benefits">
+              <h4>🎁 O que você vai receber:</h4>
+
+              <div class="checkout-benefits-grid">
+                <div class="checkout-benefit-item">✅ Acesso imediato após pagamento</div>
+                <div class="checkout-benefit-item">✅ Conteúdo exclusivo e sem censura</div>
+                <div class="checkout-benefit-item">✅ Disponível por tempo ilimitado</div>
+                <div class="checkout-benefit-item">✅ Atendimento prioritário</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="checkout-right">
+          <article class="checkout-panel checkout-payment-panel">
+            <div class="checkout-panel-head">
+              <h3>Pagamento</h3>
+            </div>
+
+            <div class="checkout-values">
+              <div class="checkout-line">
+                <span>Subtotal:</span>
+                <strong id="checkoutSubtotal">R$ 0,00</strong>
+              </div>
+
+              <div class="checkout-line">
+                <span>Taxa de processamento:</span>
+                <strong>R$ 0,00</strong>
+              </div>
+            </div>
+
+            <div class="checkout-total-box">
+              <span>Total:</span>
+              <strong id="checkoutTotal">R$ 0,00</strong>
+            </div>
+
+            <div class="checkout-payment-methods">
+              <p>Métodos de pagamento aceitos:</p>
+              <div class="checkout-method-pill">PIX</div>
+              <div class="checkout-method-pill">DÉBITO</div>
+              <div class="checkout-method-pill">CRÉDITO</div>
+            </div>
+
+            <button class="btn checkout-final-btn" id="checkoutFinalizarBtn" type="button">
+              Finalizar Compra →
+            </button>
+
+            <div class="checkout-safe-box">
+              <span>🛡️ Pagamento 100% seguro e confidencial</span>
+            </div>
+
+            <p class="checkout-help">
+              Precisa de ajuda? Entre em contato pelo Telegram
+              <a href="https://t.me/SEU_LINK" target="_blank">@laureteprive</a>
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer footer-soft footer-refined">
+  <div class="container footer-refined-grid">
+    <div class="footer-brand">
+      <h2>Laurete<span>Privé</span></h2>
+      <p>Experiência exclusiva para maiores de 18 anos, com acesso organizado, packs e área VIP.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Acesso rápido</h4>
+      <a href="https://discord.gg/bqaJ8bDX3G" target="_blank">Discord</a>
+      <a href="https://t.me/LauretePriveBot?start=ch" target="_blank">Telegram</a>
+      <a href="vip.html">Assinar agora</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+
+<script>
+  const supabaseUrl = "https://ndazcilxpjyenkymqltc.supabase.co";
+  const supabaseKey = "sb_publishable_bAojqWTshY-UjOb_Q-0wnw_FuZ-MjC9";
+  const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error || !data.session) {
+      window.location.href =
+        "login.html?msg=" +
+        encodeURIComponent("Você precisa entrar na sua conta para acessar o checkout.");
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+
+    const produto = (params.get("produto") || "Produto").trim();
+    const precoTexto = (params.get("preco") || "0").trim();
+    const preco = Number(precoTexto.replace(",", "."));
+    const imagem = "pic.png";
+    const descricao = params.get("descricao") || "Conteúdo exclusivo e sem censura";
+    const pagamento = params.get("pagamento") || "";
+
+    const linksPagamento = {
+      "pack bronze": "LINK_DO_BRONZE",
+      "pack prata": "LINK_DO_PRATA",
+      "combo gold": "https://pay.hoopay.com.br/?productId[]=295851132899456&qty[]=1",
+      "pack premium": "LINK_DO_PREMIUM",
+      "vip mensal": "LINK_DO_VIP"
+    };
+
+    function normalizarTexto(texto) {
+      return (texto || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+    }
+
+    const precoFormatado = preco.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+
+    const produtoEl = document.getElementById("checkoutProduto");
+    const descricaoEl = document.getElementById("checkoutDescricao");
+    const precoEl = document.getElementById("checkoutPreco");
+    const subtotalEl = document.getElementById("checkoutSubtotal");
+    const totalEl = document.getElementById("checkoutTotal");
+    const imagemEl = document.getElementById("checkoutImagem");
+    const finalizarBtn = document.getElementById("checkoutFinalizarBtn");
+    const countdownEl = document.getElementById("checkoutCountdown");
+
+    if (produtoEl) produtoEl.textContent = produto;
+    if (descricaoEl) descricaoEl.textContent = descricao;
+    if (precoEl) precoEl.textContent = precoFormatado;
+    if (subtotalEl) subtotalEl.textContent = precoFormatado;
+    if (totalEl) totalEl.textContent = precoFormatado;
+    if (imagemEl) imagemEl.src = imagem;
+
+    let tempoRestante = 10 * 60;
+
+    function atualizarCountdown() {
+      const minutos = String(Math.floor(tempoRestante / 60)).padStart(2, "0");
+      const segundos = String(tempoRestante % 60).padStart(2, "0");
+
+      if (countdownEl) {
+        countdownEl.textContent = `${minutos}:${segundos}`;
+      }
+
+      if (tempoRestante > 0) {
+        tempoRestante--;
+      }
+    }
+
+    atualizarCountdown();
+    setInterval(atualizarCountdown, 1000);
+
+    if (finalizarBtn) {
+      finalizarBtn.addEventListener("click", () => {
+  const produtoNormalizado = normalizarTexto(produto);
+  const linkPagamento = pagamento || linksPagamento[produtoNormalizado];
+
+  if (!linkPagamento) {
+    alert("Não encontrei o link de pagamento para: " + produto);
+    return;
+  }
+
+  finalizarBtn.disabled = true;
+  finalizarBtn.textContent = "Abrindo pagamento...";
+
+  window.open(linkPagamento, "_blank", "noopener,noreferrer");
+});
+    }
+  });
+
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+</script>
+</body>
+</html>

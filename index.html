@@ -2,17 +2,48 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#f7b3cb" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#14171d" />
   <title>Laurete Privé | Início</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <header class="header header-soft">
   <div class="container nav nav-refined">
     <h1 class="logo logo-soft">
-      <a href="index.html">Laurete<span>Privé</span></a>
+      <a href="index.html" class="logo-wrap">
+        <span class="logo-lollipop">🍭</span>
+        Laurete<span>Privé</span>
+      </a>
     </h1>
 
     <nav class="nav-desktop nav-desktop-refined">
@@ -21,7 +52,8 @@
         <li><a href="amostras.html">Amostras</a></li>
         <li><a href="packs.html">Packs</a></li>
         <li><a href="vip.html">VIP</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="webnamoro.html">Webnamoro</a></li>
       </ul>
     </nav>
 
@@ -46,7 +78,8 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
 
       <div class="mobile-menu-divider"></div>
 
@@ -68,9 +101,7 @@
         </h2>
 
         <p class="home-soft-desc-v2">
-          A Laurete Privé reúne prévias, packs e acesso VIP em uma experiência mais bonita,
-          organizada e feita pra quem quer entrar direto no conteúdo sem complicação.
-        </p>
+         Prévias 100% explícitas e exclusivas, se você gosta de uma rabudinha da bucetinha rosa, o meu conteúdo foi feito pra você ♡
 
         <div class="home-soft-actions">
           <a href="vip.html" class="btn btn-gradient-soft">Assinar agora</a>
@@ -78,7 +109,7 @@
         </div>
 
         <div class="home-links-boxes">
-          <a href="https://discord.gg/SEU_LINK" target="_blank" class="home-link-card">
+          <a href="https://discord.gg/bqaJ8bDX3G" target="_blank" class="home-link-card">
             <div class="home-link-icon">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M20.317 4.369A19.791 19.791 0 0 0 15.885 3c-.191.346-.403.81-.552 1.176a18.27 18.27 0 0 0-5.666 0A11.64 11.64 0 0 0 9.115 3a19.736 19.736 0 0 0-4.433 1.369C1.533 9.045.427 13.579.8 18.057a19.9 19.9 0 0 0 6.077 3.07c.492-.667.93-1.37 1.304-2.107a12.948 12.948 0 0 1-2.05-.976c.172-.13.34-.265.503-.404 3.946 1.824 8.233 1.824 12.134 0 .164.139.332.274.503.404a12.936 12.936 0 0 1-2.051.976c.374.737.812 1.44 1.304 2.107a19.897 19.897 0 0 0 6.078-3.07c.44-5.177-.75-9.668-3.285-13.688ZM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.955-2.419 2.157-2.419 1.212 0 2.167 1.095 2.157 2.419 0 1.334-.955 2.419-2.157 2.419Zm7.96 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.334.955-2.419 2.157-2.419 1.212 0 2.167 1.095 2.157 2.419 0 1.334-.945 2.419-2.157 2.419Z"/>
@@ -90,7 +121,7 @@
             </div>
           </a>
 
-          <a href="https://t.me/SEU_LINK" target="_blank" class="home-link-card">
+          <a href="https://t.me/LauretePriveBot?start=ch" target="_blank" class="home-link-card">
             <div class="home-link-icon">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M21.944 4.516a1.5 1.5 0 0 0-1.72-.213L2.792 12.344a1.5 1.5 0 0 0 .165 2.767l4.323 1.497 1.624 5.221a1.5 1.5 0 0 0 2.613.532l2.43-2.968 4.694 3.454a1.5 1.5 0 0 0 2.36-.92l2.41-15.76a1.5 1.5 0 0 0-.467-1.651ZM9.392 16.262l-.956 3.076-.981-3.155 8.648-6.688-6.711 6.767Zm9.81 3.125-4.24-3.12a1.5 1.5 0 0 0-2.042.234l-1.516 1.851.817-2.629 6.675-6.73a1 1 0 0 0-1.245-1.56L5.369 14.52l-1.431-.495 15.573-7.183-2.309 12.545Z"/>
@@ -104,36 +135,134 @@
         </div>
       </div>
 
-      <div class="home-media-montage">
-        <div class="montage-main-card">
-          <div class="montage-floating-badge">
-            <strong>Laurete Privé</strong>
-            <span>Amostras, packs e acesso VIP</span>
-          </div>
+     <div class="home-media-montage">
+  <div class="montage-main-card">
+    <div class="montage-floating-badge">
+      <strong>Laurete Privé</strong>
+      <span>Amostras, packs e acesso VIP</span>
+    </div>
 
-          <video class="montage-main-video" autoplay muted loop playsinline>
-            <source src="lau5 (1).mp4" type="video/mp4">
-          </video>
-        </div>
+    <img src="cuti.jpg" alt="Imagem principal" class="montage-media montage-main-video">
+  </div>
 
-        <div class="montage-side-grid">
-          <div class="montage-mini-card">
-            <div class="montage-mini-placeholder">Mídia 02</div>
-          </div>
+  <div class="montage-side-grid">
+    <div class="montage-mini-card">
+      <img src="cute.jpg" alt="Imagem lateral" class="montage-media montage-mini-media">
+    </div>
 
-          <div class="montage-mini-card">
-            <div class="montage-mini-placeholder">Mídia 03</div>
-          </div>
-
-          <div class="montage-mini-card montage-mini-wide">
-            <div class="montage-mini-placeholder">Mídia 04</div>
-          </div>
-        </div>
-      </div>
+    <div class="montage-mini-card">
+      <img src="cuta.jpg" alt="Prévia exclusiva" class="montage-media montage-mini-media">
+    </div>
+  </div>
+</div>
 
     </div>
   </section>
 </main>
+
+<section class="home-highlight-section">
+  <div class="container">
+
+    <div class="highlight-topo">
+      <span class="highlight-mini">✦ Exclusivo</span>
+      <h2>Serviços Exclusivos</h2>
+      <p>Experiências personalizadas criadas com carinho especialmente para você ♡</p>
+    </div>
+
+    <div class="highlight-grid">
+      <article class="highlight-card">
+        <span class="highlight-ribbon">Popular</span>
+        <div class="highlight-icon">🎥</div>
+        <h3>Chamada de Vídeo</h3>
+        <p>Chamada comigo peladinha me mostrando ao vivo só pra você.</p>
+        <strong>A partir de R$ 14,90,00</strong>
+        <a href="servicos.html" class="highlight-btn">Saiba Mais →</a>
+      </article>
+
+      <article class="highlight-card">
+        <span class="highlight-ribbon">Popular</span>
+        <div class="highlight-icon">💬</div>
+        <h3>Sexting</h3>
+        <p>Conversas picantes e sensuais por mensagem.</p>
+        <strong>A partir de R$ 14,90</strong>
+        <a href="servicos.html" class="highlight-btn">Saiba Mais →</a>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon">❤️</div>
+        <h3>Companhia</h3>
+        <p>Passe um tempinho comigo pra gente se divertir juntos.</p>
+        <strong>A partir de R$ 49,90</strong>
+        <a href="webnamoro.html" class="highlight-btn">Saiba Mais →</a>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon">⭐</div>
+        <h3>Avaliação</h3>
+        <p>Avalio fotos e vídeos que você quiser.</p>
+        <strong>A partir de R$ 7,90</strong>
+        <a href="servicos.html" class="highlight-btn">Saiba Mais →</a>
+      </article>
+    </div>
+
+    <div class="highlight-footer">
+      <a href="servicos.html" class="highlight-more-btn">Ver Todos os Serviços ✦</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="home-highlight-section home-packs-section">
+  <div class="container">
+
+    <div class="highlight-topo">
+      <span class="highlight-mini">♡ Packs</span>
+      <h2>Packs em Destaque</h2>
+      <p>Escolha o pack ideal e entre direto no conteúdo que mais combina com você.</p>
+    </div>
+
+    <div class="highlight-grid">
+      <article class="highlight-card">
+        <div class="highlight-icon">◈</div>
+        <h3>Pack Bronze</h3>
+        <p>Entrada simples pra começar e acessar uma seleção inicial.</p>
+        <strong>R$ 9,90</strong>
+        <a href="packs.html" class="highlight-btn">Ver Pack →</a>
+      </article>
+
+      <article class="highlight-card">
+        <span class="highlight-ribbon">Popular</span>
+        <div class="highlight-icon">✦</div>
+        <h3>Pack Prata</h3>
+        <p>Mais variedade e uma experiência melhor que a entrada inicial.</p>
+        <strong>R$ 19,90</strong>
+        <a href="packs.html" class="highlight-btn">Ver Pack →</a>
+      </article>
+
+      <article class="highlight-card highlight-card-featured">
+        <span class="highlight-ribbon">Best Seller</span>
+        <div class="highlight-icon">👑</div>
+        <h3>Combo Gold</h3>
+        <p>Mais completo, mais desejado e com melhor percepção de valor.</p>
+        <strong>R$ 29,90</strong>
+        <a href="packs.html" class="highlight-btn">Ver Pack →</a>
+      </article>
+
+      <article class="highlight-card">
+        <div class="highlight-icon">★</div>
+        <h3>Pack Premium</h3>
+        <p>A versão mais completa pra quem quer uma entrega mais ampla.</p>
+        <strong>R$ 49,90</strong>
+        <a href="packs.html" class="highlight-btn">Ver Pack →</a>
+      </article>
+    </div>
+
+    <div class="highlight-footer">
+      <a href="packs.html" class="highlight-more-btn">Ver Todos os Packs ♡</a>
+    </div>
+
+  </div>
+</section>
 
 <footer class="footer footer-soft">
   <div class="container footer-content">
@@ -143,6 +272,12 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+<script>
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+</script>
 </body>
 </html>

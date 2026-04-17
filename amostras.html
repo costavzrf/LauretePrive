@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#14171d" />
   <title>Laurete Privé | Amostras</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
- <header class="header header-soft">
+<header class="header header-soft">
   <div class="container nav nav-refined">
     <h1 class="logo logo-soft">
-      <a href="index.html">Laurete<span>Privé</span></a>
+      <a href="index.html" class="logo-wrap">
+  <span class="logo-lollipop">🍭</span>
+  Laurete<span>Privé</span>
+</a>
     </h1>
 
     <nav class="nav-desktop nav-desktop-refined">
@@ -22,14 +52,14 @@
         <li><a href="amostras.html" class="ativo">Amostras</a></li>
         <li><a href="packs.html">Packs</a></li>
         <li><a href="vip.html">VIP</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="webnamoro.html">Webnamoro</a></li>
       </ul>
     </nav>
 
     <div class="nav-actions">
       <a href="vip.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Assinar</a>
 
-      <!-- BOTÃO DARK MODE -->
       <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
         🌙
       </button>
@@ -48,7 +78,8 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
 
       <div class="mobile-menu-divider"></div>
 
@@ -56,183 +87,164 @@
     </div>
   </div>
 </header>
-  <main class="amostras-page">
-    <section class="amostras-topo">
-      <div class="container">
-        <p class="tag">Amostras</p>
-        <h2 class="page-title">Veja as prévias em um feed rápido e organizado</h2>
-        <p class="desc center">
-          Role para ver as amostras, curtir, favoritar e desbloquear o conteúdo completo.
-        </p>
-      </div>
-    </section>
 
-    <section class="amostras-feed-section">
-      <div class="container">
-        <div class="amostras-feed">
+<main class="amostras-page">
+  <section class="amostras-topo">
+    <div class="container">
+      <p class="tag">Amostras</p>
+      <h2 class="page-title">Veja as prévias em um feed rápido e organizado</h2>
+      <p class="desc center">
+        Role para ver as amostras e desbloquear o conteúdo completo.
+      </p>
+    </div>
+  </section>
 
-          <!-- 1 -->
-          <article class="amostra-card">
-            <div class="amostra-video-wrap">
-              <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
-                <source src="laurete.mp4" type="video/mp4" />
-              </video>
-              <button class="som-btn">🔇</button>
-              <div class="amostra-gradient"></div>
-              <div class="amostra-overlay hidden">
-                <div class="amostra-overlay-box">
-                  <p class="overlay-mini">Prévia finalizada</p>
-                  <h3>Desbloqueie o conteúdo completo</h3>
-                  <div class="overlay-buttons">
-                    <a href="packs.html" class="btn principal">Ver packs</a>
-                    <a href="vip.html" class="btn secundario">Área VIP</a>
-                  </div>
-                </div>
-              </div>
-              <div class="amostra-acoes">
-                <button class="acao-btn like-btn">❤</button>
-                <button class="acao-btn fav-btn">★</button>
-              </div>
-              <div class="amostra-info">
-                <h3>Prévia 01</h3>
-                <p class="legenda-video">Uma prévia rápida para apresentar o estilo do conteúdo e incentivar o acesso completo.</p>
-              </div>
-            </div>
-          </article>
+  <section class="amostras-feed-section">
+    <div class="container">
+      <div class="amostras-feed">
 
-          <!-- 2 -->
-          <article class="amostra-card">
-            <div class="amostra-video-wrap">
-              <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
-                <source src="lau.mp4" type="video/mp4" />
-              </video>
-              <button class="som-btn">🔇</button>
-              <div class="amostra-gradient"></div>
-              <div class="amostra-overlay hidden">
-                <div class="amostra-overlay-box">
-                  <h3>Continue assistindo no VIP</h3>
-                  <a href="vip.html" class="btn principal">Entrar</a>
-                </div>
-              </div>
-              <div class="amostra-acoes">
-                <button class="acao-btn like-btn">❤</button>
-                <button class="acao-btn fav-btn">★</button>
-              </div>
-              <div class="amostra-info">
-                <h3>Prévia 02</h3>
-                <p class="legenda-video">Mais uma amostra em formato vertical, pensada para navegação rápida no celular.</p>
-              </div>
-            </div>
-          </article>
-
-          <!-- 3 -->
-          <article class="amostra-card">
-            <div class="amostra-video-wrap">
-              <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
-                <source src="lauu.mp4" type="video/mp4" />
-              </video>
-              <button class="som-btn">🔇</button>
-              <div class="amostra-gradient"></div>
-              <div class="amostra-overlay hidden">
-                <div class="amostra-overlay-box">
-                  <h3>Desbloqueie para ver mais</h3>
-                  <a href="packs.html" class="btn principal">Desbloquear</a>
-                </div>
-              </div>
-              <div class="amostra-acoes">
-                <button class="acao-btn like-btn">❤</button>
-                <button class="acao-btn fav-btn">★</button>
-              </div>
-              <div class="amostra-info">
-                <h3>Prévia 03</h3>
-                <p class="legenda-video">Uma experiência mais próxima, com visual estilo app mas integrado ao site.</p>
-              </div>
-            </div>
-          </article>
-
-          <!-- 4 -->
-          <article class="amostra-card">
-            <div class="amostra-video-wrap">
-              <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
-                <source src="video4.mp4" type="video/mp4" />
-              </video>
-              <button class="som-btn">🔇</button>
-              <div class="amostra-gradient"></div>
-              <div class="amostra-overlay hidden">
-                <div class="amostra-overlay-box">
-                  <h3>Conteúdo completo disponível</h3>
+        <article class="amostra-card">
+          <div class="amostra-video-wrap">
+            <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
+              <source src="n1.mp4" type="video/mp4" />
+            </video>
+            <button class="som-btn">🔇</button>
+            <div class="amostra-gradient"></div>
+            <div class="amostra-overlay hidden">
+              <div class="amostra-overlay-box">
+                <p class="overlay-mini">Prévia finalizada</p>
+                <h3>Desbloqueie o conteúdo completo</h3>
+                <div class="overlay-buttons">
                   <a href="packs.html" class="btn principal">Ver packs</a>
+                  <a href="vip.html" class="btn secundario">Área VIP</a>
                 </div>
               </div>
-              <div class="amostra-acoes">
-                <button class="acao-btn like-btn">❤</button>
-                <button class="acao-btn fav-btn">★</button>
-              </div>
-              <div class="amostra-info">
-                <h3>Prévia 04</h3>
-                <p class="legenda-video">Mais conteúdos disponíveis para quem quiser continuar explorando o feed.</p>
+            </div>
+            <div class="amostra-acoes">
+            </div>
+            <div class="amostra-info">
+            </div>
+          </div>
+        </article>
+
+        <article class="amostra-card">
+          <div class="amostra-video-wrap">
+            <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
+              <source src="n2.mp4" type="video/mp4" />
+            </video>
+            <button class="som-btn">🔇</button>
+           <div class="amostra-gradient"></div>
+            <div class="amostra-overlay hidden">
+              <div class="amostra-overlay-box">
+                <p class="overlay-mini">Prévia finalizada</p>
+                <h3>Desbloqueie o conteúdo completo</h3>
+                <div class="overlay-buttons">
+                  <a href="packs.html" class="btn principal">Ver packs</a>
+                  <a href="vip.html" class="btn secundario">Área VIP</a>
               </div>
             </div>
-          </article>
+            <div class="amostra-acoes">
+            </div>
+            <div class="amostra-info">
+          </div>
+        </article>
 
-          <!-- 5 -->
-          <article class="amostra-card">
-            <div class="amostra-video-wrap">
-              <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
-                <source src="video5.mp4" type="video/mp4" />
-              </video>
-              <button class="som-btn">🔇</button>
-              <div class="amostra-gradient"></div>
-              <div class="amostra-overlay hidden">
-                <div class="amostra-overlay-box">
-                  <h3>Acesso VIP necessário</h3>
-                  <a href="vip.html" class="btn principal">Entrar</a>
+        <article class="amostra-card">
+          <div class="amostra-video-wrap">
+            <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
+              <source src="n3.mp4" type="video/mp4" />
+            </video>
+            <button class="som-btn">🔇</button>
+            <div class="amostra-gradient"></div>
+            <div class="amostra-overlay hidden">
+              <div class="amostra-overlay-box">
+                <p class="overlay-mini">Prévia finalizada</p>
+                <h3>Desbloqueie o conteúdo completo</h3>
+                <div class="overlay-buttons">
+                  <a href="packs.html" class="btn principal">Ver packs</a>
+                  <a href="vip.html" class="btn secundario">Área VIP</a>
+              </div>
+            </div>
+            <div class="amostra-acoes">
+            </div>
+            <div class="amostra-info">
+            </div>
+          </div>
+        </article>
+
+        <article class="amostra-card">
+          <div class="amostra-video-wrap">
+            <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
+              <source src="n4.mp4" type="video/mp4" />
+            </video>
+            <button class="som-btn">🔇</button>
+            <div class="amostra-gradient"></div>
+            <div class="amostra-overlay hidden">
+              <div class="amostra-overlay-box">
+                <p class="overlay-mini">Prévia finalizada</p>
+                <h3>Desbloqueie o conteúdo completo</h3>
+                <div class="overlay-buttons">
+                  <a href="packs.html" class="btn principal">Ver packs</a>
+                  <a href="vip.html" class="btn secundario">Área VIP</a>
+              </div>
+            </div>
+            <div class="amostra-acoes">
+            <div class="amostra-info">
+            </div>
+          </div>
+        </article>
+
+        <article class="amostra-card">
+          <div class="amostra-video-wrap">
+            <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
+              <source src="n5.mp4" type="video/mp4" />
+            </video>
+            <button class="som-btn">🔇</button>
+           <div class="amostra-gradient"></div>
+            <div class="amostra-overlay hidden">
+              <div class="amostra-overlay-box">
+                <p class="overlay-mini">Prévia finalizada</p>
+                <h3>Desbloqueie o conteúdo completo</h3>
+                <div class="overlay-buttons">
+                  <a href="packs.html" class="btn principal">Ver packs</a>
+                  <a href="vip.html" class="btn secundario">Área VIP</a>
+              </div>
+            </div>
+            </div>
+            <div class="amostra-info">
+        </article>
+
+        <article class="amostra-card">
+          <div class="amostra-video-wrap">
+            <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
+              <source src="n6.mp4" type="video/mp4" />
+            </video>
+            <button class="som-btn">🔇</button>
+            <div class="amostra-gradient"></div>
+            <div class="amostra-overlay hidden">
+              <div class="amostra-overlay-box">
+                <p class="overlay-mini">Prévia finalizada</p>
+                <h3>Desbloqueie o conteúdo completo</h3>
+                <div class="overlay-buttons">
+                  <a href="packs.html" class="btn principal">Ver packs</a>
+                  <a href="vip.html" class="btn secundario">Área VIP</a>
                 </div>
               </div>
-              <div class="amostra-acoes">
-                <button class="acao-btn like-btn">❤</button>
-                <button class="acao-btn fav-btn">★</button>
-              </div>
-              <div class="amostra-info">
-                <h3>Prévia 05</h3>
-                <p class="legenda-video">Uma prévia com foco em retenção, com legenda visível e leitura fácil no mobile.</p>
-              </div>
             </div>
-          </article>
-
-          <!-- 6 -->
-          <article class="amostra-card">
-            <div class="amostra-video-wrap">
-              <video class="amostra-video" muted playsinline preload="metadata" data-lock="0.78">
-                <source src="video6.mp4" type="video/mp4" />
-              </video>
-              <button class="som-btn">🔇</button>
-              <div class="amostra-gradient"></div>
-              <div class="amostra-overlay hidden">
-                <div class="amostra-overlay-box">
-                  <h3>Desbloqueie mais conteúdos</h3>
-                  <a href="packs.html" class="btn principal">Ver</a>
-                </div>
-              </div>
-              <div class="amostra-acoes">
-                <button class="acao-btn like-btn">❤</button>
-                <button class="acao-btn fav-btn">★</button>
-              </div>
-              <div class="amostra-info">
-                <h3>Prévia 06</h3>
-                <p class="legenda-video">Continue navegando pelo feed e descubra novas prévias com acesso rápido.</p>
-              </div>
+            <div class="amostra-acoes">
             </div>
-          </article>
+            <div class="amostra-info">
+            </div>
+          </div>
+        </article>
 
-        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer class="footer footer-soft footer-refined">
+<footer class="footer footer-soft footer-refined">
   <div class="container footer-refined-grid">
-
     <div class="footer-brand">
       <h2>Laurete<span>Privé</span></h2>
       <p>Experiência exclusiva para maiores de 18 anos, com acesso organizado, packs e área VIP.</p>
@@ -244,16 +256,14 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
     </div>
 
     <div class="footer-links">
       <h4>Acesso rápido</h4>
-      <a href="https://discord.gg/SEU_LINK" target="_blank">Discord</a>
-      <a href="https://t.me/SEU_LINK" target="_blank">Telegram</a>
+      <a href="https://discord.gg/bqaJ8bDX3G" target="_blank">Discord</a>
+      <a href="https://t.me/LauretePriveBot?start=ch" target="_blank">Telegram</a>
       <a href="vip.html">Assinar agora</a>
     </div>
-
   </div>
 
   <div class="container footer-bottom">
@@ -262,6 +272,12 @@
   </div>
 </footer>
 
-  <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+<script>
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+</script>
 </body>
 </html>
