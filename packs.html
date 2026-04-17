@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#14171d" />
   <title>Laurete Privé | Packs</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,7 +40,10 @@
 <header class="header header-soft">
   <div class="container nav nav-refined">
     <h1 class="logo logo-soft">
-      <a href="index.html">Laurete<span>Privé</span></a>
+      <a href="index.html" class="logo-wrap">
+        <span class="logo-lollipop">🍭</span>
+        Laurete<span>Privé</span>
+      </a>
     </h1>
 
     <nav class="nav-desktop nav-desktop-refined">
@@ -22,7 +52,8 @@
         <li><a href="amostras.html">Amostras</a></li>
         <li><a href="packs.html" class="ativo">Packs</a></li>
         <li><a href="vip.html">VIP</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="webnamoro.html">Webnamoro</a></li>
       </ul>
     </nav>
 
@@ -47,7 +78,8 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
 
       <div class="mobile-menu-divider"></div>
 
@@ -70,7 +102,6 @@
   <section class="packs-curated-section">
     <div class="container">
 
-      <!-- CARD PRINCIPAL -->
       <article class="pack-curated-card pack-curated-featured">
         <span class="pack-curated-corner">Destaque</span>
 
@@ -79,11 +110,11 @@
             <div class="pack-curated-icon">✦</div>
             <div>
               <div class="pack-curated-topline">
-                <h3>Pack Gold</h3>
+                <h3>COMBO GOLD</h3>
                 <span class="pack-curated-pill">Mais pedido</span>
               </div>
               <p>
-                Uma opção mais equilibrada pra quem quer bastante conteúdo sem ir direto pro mais completo.
+                O combo mais COMPLETO, pra quem quer me ver sendo uma putinha de todas as formas e gozar bem gostoso
               </p>
             </div>
           </div>
@@ -93,36 +124,55 @@
           <p class="pack-curated-label">Detalhes:</p>
 
           <ul class="pack-curated-list">
-            <li>Mais conteúdo e melhor percepção de valor</li>
-            <li>Equilíbrio ideal entre preço e entrega</li>
-            <li>Escolha mais natural pra maioria</li>
-            <li>Acesso rápido e organizado</li>
+            <li>OFERTA LIMITADA</li>
+            <li>PACK COSPLAY DE BRINDE</li>
+            <li>Gemendo muito igual uma putinha</li>
+            <li>22 minutos de conteúdo</li>
+            <li>Vídezinhos levando pica na bucetinha</li>
+            <li>Videozinhos solo enfiando o dedo e o consolo no cu e na buceta</li>
+            <li>LIBERAÇÃO INSTANTÂNEA</li>
           </ul>
         </div>
 
-        <div class="pack-curated-footer">
+        <div class="pack-curated-footer pack-curated-footer-promo">
           <div>
-            <p class="pack-curated-price-label">Preço:</p>
+            <p class="pack-curated-price-label">Oferta especial:</p>
+            <p class="pack-curated-old-price">De R$ 69,90</p>
           </div>
-          <strong class="pack-curated-price">R$ 29,90</strong>
+
+          <div class="pack-curated-price-box">
+            <div class="offer-timer">
+              <span class="timer-label">⏳ Oferta relâmpago (primeira compra)</span>
+              <span id="countdown">15:00</span>
+            </div>
+
+            <span class="pack-curated-discount">PROMOÇÃO</span>
+            <strong class="pack-curated-price">R$ 34,90</strong>
+          </div>
         </div>
 
-        <a href="#" class="pack-curated-btn">Entrar no Gold</a>
+        <p class="pack-curated-urgency">Hoje com valor promocional por tempo limitado.</p>
+
+        <a
+  href="checkout.html?produto=COMBO%20GOLD&preco=34.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Mais%20conte%C3%BAdo%2C%20melhor%20percep%C3%A7%C3%A3o%20de%20valor%20e%20acesso%20organizado.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F295851132899456"
+  class="pack-curated-btn"
+>Entrar no Gold</a>
       </article>
 
-      <!-- GRID INFERIOR -->
       <div class="packs-curated-grid">
 
         <article class="pack-curated-card">
+          <span class="pack-curated-mini-badge">Mais vendidos</span>
+
           <div class="pack-curated-head">
             <div class="pack-curated-title-wrap">
               <div class="pack-curated-icon">◈</div>
               <div>
                 <div class="pack-curated-topline">
-                  <h3>Pack Bronze</h3>
+                  <h3>PACK COLEGIAL</h3>
                 </div>
                 <p>
-                  Entrada simples pra começar e acessar uma seleção inicial.
+                  Packzinho com roupa de colegial, saia bem curtinha e uma camisa mostrando tudo
                 </p>
               </div>
             </div>
@@ -132,9 +182,11 @@
             <p class="pack-curated-label">Detalhes:</p>
 
             <ul class="pack-curated-list">
-              <li>Conteúdo inicial selecionado</li>
-              <li>Acesso rápido e direto</li>
-              <li>Ideal pra primeira compra</li>
+              <li>10 MINUTOS DE SEXO COM ROUPA DE COLEGIAL</li>
+              <li>Gemendo muito igual uma putinha</li>
+              <li>Dando a bucetinha em todas as posições</li>
+              <li>Levando gozada no cuzinho no final</li>
+              <li>LIBERAÇÃO INSTANTÂNEA</li>
             </ul>
           </div>
 
@@ -142,24 +194,27 @@
             <div>
               <p class="pack-curated-price-label">Preço:</p>
             </div>
-            <strong class="pack-curated-price">R$ 9,90</strong>
+            <strong class="pack-curated-price">R$ 24,90</strong>
           </div>
 
-          <a href="#" class="pack-curated-btn pack-curated-btn-soft">Começar agora</a>
+          <a
+            href="checkout.html?produto=PACK%20COLEGIAL&preco=24.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Pack%20colegial%20com%20roupa%20de%20colegial%2C%20saia%20curtinha%20e%20cena%20completa.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F296263272353920"
+            class="pack-curated-btn pack-curated-btn-soft"
+          >Comprar agora</a>
         </article>
 
         <article class="pack-curated-card">
-          <span class="pack-curated-mini-badge">Escolha segura</span>
+          <span class="pack-curated-mini-badge">Mais vendidos</span>
 
           <div class="pack-curated-head">
             <div class="pack-curated-title-wrap">
               <div class="pack-curated-icon">✧</div>
               <div>
                 <div class="pack-curated-topline">
-                  <h3>Pack Prata</h3>
+                  <h3>PACK COSPLAY</h3>
                 </div>
                 <p>
-                  Mais variedade e uma experiência melhor que a entrada inicial.
+                  Packzinho com cosplay de anime, brincando muito com o cuzinho e bucetinha
                 </p>
               </div>
             </div>
@@ -169,9 +224,10 @@
             <p class="pack-curated-label">Detalhes:</p>
 
             <ul class="pack-curated-list">
-              <li>Mais variedade que o Bronze</li>
-              <li>Experiência mais completa</li>
-              <li>Melhor evolução de custo</li>
+              <li>9 MINUTOS BRINCANDO COM A BUCETINHA</li>
+              <li>Gemendo muito igual uma putinha</li>
+              <li>Enfiando o dedo e o consolo no cuzinho e na bucetinha</li>
+              <li>LIBERAÇÃO INSTANTÂNEA</li>
             </ul>
           </div>
 
@@ -179,24 +235,27 @@
             <div>
               <p class="pack-curated-price-label">Preço:</p>
             </div>
-            <strong class="pack-curated-price">R$ 19,90</strong>
+            <strong class="pack-curated-price">R$ 24,90</strong>
           </div>
 
-          <a href="#" class="pack-curated-btn pack-curated-btn-soft">Quero mais acesso</a>
+          <a
+            href="checkout.html?produto=PACK%20COSPLAY&preco=24.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Pack%20cosplay%20com%20anime%20e%20brincadeiras%20com%20o%20cuzinho%20e%20bucetinha.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F296268018483328"
+            class="pack-curated-btn pack-curated-btn-soft"
+          >Comprar agora</a>
         </article>
 
         <article class="pack-curated-card">
-          <span class="pack-curated-mini-badge">Completo</span>
+          <span class="pack-curated-mini-badge">Mais vendidos</span>
 
           <div class="pack-curated-head">
             <div class="pack-curated-title-wrap">
               <div class="pack-curated-icon">✷</div>
               <div>
                 <div class="pack-curated-topline">
-                  <h3>Pack Premium</h3>
+                  <h3>PACK QUICADA</h3>
                 </div>
                 <p>
-                  A versão mais completa pra quem quer uma entrega mais ampla.
+                  Packzinho quicando bem gostoso no consolo, mostrando a bucetinha e o cuzinho
                 </p>
               </div>
             </div>
@@ -206,9 +265,11 @@
             <p class="pack-curated-label">Detalhes:</p>
 
             <ul class="pack-curated-list">
-              <li>Conteúdo mais completo</li>
-              <li>Experiência exclusiva</li>
-              <li>Conteúdos não disponíveis nos outros packs</li>
+              <li>7 MINUTOS DE COSTAS QUICANDO NO CONSOLO</li>
+              <li>Gemendo muito igual uma putinha</li>
+              <li>Mostrando o cuzinho enquanto quica no consolo</li>
+              <li>QUICANDO ATÉ O CONSOLO FICAR MELADINHO</li>
+              <li>LIBERAÇÃO INSTANTÂNEA</li>
             </ul>
           </div>
 
@@ -216,10 +277,120 @@
             <div>
               <p class="pack-curated-price-label">Preço:</p>
             </div>
-            <strong class="pack-curated-price">R$ 49,90</strong>
+            <strong class="pack-curated-price">R$ 24,90</strong>
           </div>
 
-          <a href="#" class="pack-curated-btn pack-curated-btn-soft">Quero tudo</a>
+          <a
+            href="checkout.html?produto=PACK%20QUICADA&preco=24.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Pack%20quicada%20no%20consolo%20mostrando%20a%20bucetinha%20e%20o%20cuzinho.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F296268099514496"
+            class="pack-curated-btn pack-curated-btn-soft"
+          >Quero tudo</a>
+        </article>
+
+        <article class="pack-curated-card">
+          <div class="pack-curated-head">
+            <div class="pack-curated-title-wrap">
+              <div class="pack-curated-icon">✦</div>
+              <div>
+                <div class="pack-curated-topline">
+                  <h3>PACK ANAL</h3>
+                </div>
+                <p>
+                  Dando meu cu bem gostosinho e recebendo gozada nele enquanto gemo igual uma putinha
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pack-curated-details">
+            <p class="pack-curated-label">Detalhes:</p>
+            <ul class="pack-curated-list">
+              <li>4 MINUTOS DE SEXO ANAL BEM GOSTOSO</li>
+              <li>Gemendo muito igual uma putinha</li>
+              <li>Dando o cuzinho bem gostoso e recebendo gozada no final</li>
+              <li>LIBERAÇÃO INSTANTÂNEA</li>
+            </ul>
+          </div>
+
+          <div class="pack-curated-footer">
+            <strong class="pack-curated-price">R$ 19,90</strong>
+          </div>
+
+          <a
+            href="checkout.html?produto=PACK%20ANAL&preco=19.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Pack%20anal%20com%20sexo%20anal%20e%20gozada%20no%20final.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F296268219883648"
+            class="pack-curated-btn"
+          >Comprar agora</a>
+        </article>
+
+        <article class="pack-curated-card">
+          <div class="pack-curated-head">
+            <div class="pack-curated-title-wrap">
+              <div class="pack-curated-icon">🔥</div>
+              <div>
+                <div class="pack-curated-topline">
+                  <h3>PACK BDSM</h3>
+                </div>
+                <p>
+                  Amarrada sem poder fazer nada, enquanto recebo dedada e gemo igual uma putinha
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pack-curated-details">
+            <p class="pack-curated-label">Detalhes:</p>
+            <ul class="pack-curated-list">
+              <li>7 MINUTOS DE PACK</li>
+              <li>Sendo acariciada e tocada enquanto estou amarrada</li>
+              <li>Sendo tocada enquanto não posso fazer nada além de gemer igual uma putinha</li>
+              <li>LIBERAÇÃO INSTANTÂNEA</li>
+            </ul>
+          </div>
+
+          <div class="pack-curated-footer">
+            <strong class="pack-curated-price">R$ 14,90</strong>
+          </div>
+
+          <a
+            href="checkout.html?produto=PACK%20BDSM&preco=14.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Pack%20BDSM%20com%20cena%20amarrada%20e%20toques%20intensos.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F296268292849792"
+            class="pack-curated-btn"
+          >Quero acesso</a>
+        </article>
+
+        <article class="pack-curated-card">
+          <div class="pack-curated-head">
+            <div class="pack-curated-title-wrap">
+              <div class="pack-curated-icon">👑</div>
+              <div>
+                <div class="pack-curated-topline">
+                  <h3>PACK LEITINHO</h3>
+                </div>
+                <p>
+                  Recebendo leitinho no cuzinho e na buceta, e enfiando o consolo com tudo
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pack-curated-details">
+            <p class="pack-curated-label">Detalhes:</p>
+            <ul class="pack-curated-list">
+              <li>3 MINUTOS DE PACK</li>
+              <li>Gemendo igual uma putinha</li>
+              <li>Videozinho recebendo creampie na bucetinha</li>
+              <li>Videozinho recebendo gozada no cuzinho</li>
+              <li>Videozinho enfiando o consolo na bucetinha e gemendo muito</li>
+              <li>LIBERAÇÃO INSTANTÂNEA</li>
+            </ul>
+          </div>
+
+          <div class="pack-curated-footer">
+            <strong class="pack-curated-price">R$ 9,90</strong>
+          </div>
+
+          <a
+            href="checkout.html?produto=PACK%20LEITINHO&preco=9.90&imagem=https%3A%2F%2Fplacehold.co%2F220x220%2Fpng&descricao=Pack%20leitinho%20com%20creampie%2C%20gozada%20e%20consolo.&pagamento=https%3A%2F%2Fp.hoopay.com.br%2Fv%2F296268363890816"
+            class="pack-curated-btn"
+          >Comprar</a>
         </article>
 
       </div>
@@ -227,8 +398,8 @@
       <div class="packs-curated-info">
         <h4>Qual escolher?</h4>
         <p>
-          O <strong>Bronze</strong> é a entrada mais simples. O <strong>Prata</strong> já entrega uma experiência melhor.
-          O <strong>Gold</strong> é o ponto de equilíbrio entre valor e conteúdo. Já o <strong>Premium</strong> é pra quem quer a versão mais completa.
+          O <strong>Combo Gold</strong> é o ponto de equilíbrio entre valor e conteúdo. Os packs individuais são ideais
+          pra quem quer escolher exatamente o tipo de conteúdo que prefere.
         </p>
       </div>
 
@@ -250,13 +421,12 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
     </div>
 
     <div class="footer-links">
       <h4>Acesso rápido</h4>
-      <a href="https://discord.gg/SEU_LINK" target="_blank">Discord</a>
-      <a href="https://t.me/SEU_LINK" target="_blank">Telegram</a>
+      <a href="https://discord.gg/bqaJ8bDX3G" target="_blank">Discord</a>
+      <a href="https://t.me/LauretePriveBot?start=ch" target="_blank">Telegram</a>
       <a href="vip.html">Assinar agora</a>
     </div>
 
@@ -269,5 +439,37 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  let tempo = 15 * 60;
+  const countdown = document.getElementById("countdown");
+
+  if (!countdown) return;
+
+  function atualizarTimer() {
+    const minutos = Math.floor(tempo / 60);
+    const segundos = tempo % 60;
+
+    countdown.textContent =
+      String(minutos).padStart(2, "0") + ":" +
+      String(segundos).padStart(2, "0");
+
+    if (tempo > 0) {
+      tempo--;
+    }
+  }
+
+  atualizarTimer();
+  setInterval(atualizarTimer, 1000);
+});
+</script>
+
 </body>
 </html>

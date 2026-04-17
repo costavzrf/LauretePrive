@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#14171d" />
+  <title>Laurete Privé | Web Namoro</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html" class="logo-wrap">
+  <span class="logo-lollipop">🍭</span>
+  Laurete<span>Privé</span>
+</a>
+    </h1>
+
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html">Amostras</a></li>
+        <li><a href="packs.html">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="webnamoro.html" class="ativo">Web Namoro</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="#planos-webnamoro" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Ver planos</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Web Namoro</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="#planos-webnamoro" class="mobile-menu-cta">Ver planos</a>
+    </div>
+  </div>
+</header>
+
+<main class="webnamoro-page">
+  <section class="webnamoro-hero">
+    <div class="container">
+      <p class="tag">Web Namoro</p>
+      <h2 class="page-title">Uma experiência mais próxima, carinhosa e personalizada</h2>
+      <p class="desc center">
+        Uma conexão leve e envolvente, com planos pensados para diferentes tempos de experiência.
+      </p>
+    </div>
+  </section>
+
+  <section class="webnamoro-section" id="planos-webnamoro">
+    <div class="container">
+
+      <article class="webnamoro-featured-card">
+        <span class="webnamoro-featured-badge">Melhor valor</span>
+
+        <div class="webnamoro-featured-left">
+          <p class="webnamoro-featured-mini">Plano em destaque</p>
+          <h3>1 Mês Completo</h3>
+          <p class="webnamoro-featured-text">
+            A melhor opção pra quem quer me ter 100% como sua putinha pra fazer tudo que você manda
+
+          <ul class="webnamoro-featured-list">
+            <li>Chamada de vídeo todas as semanas</li>
+            <li>Conversa de putaria sempre que você quiser</li>
+            <li>Acesso mensal ao VIP</li>
+            <li>Fotinhas e vídeos de como eu to vestida e do que eu to fazendo</li>
+            <li>Jogar joguinhos juntos</li>
+            <li>1 pack de sua escolha</li>
+          </ul>
+        </div>
+
+        <div class="webnamoro-featured-right">
+          <div class="webnamoro-featured-price-wrap webnamoro-featured-price-promo">
+            <div>
+              <span class="webnamoro-price-label">Oferta especial:</span>
+              <p class="webnamoro-old-price">De R$ 199,90</p>
+            </div>
+
+            <div class="webnamoro-price-box">
+              <span class="webnamoro-discount">PROMOÇÃO</span>
+              <strong class="webnamoro-featured-price">R$ 149,90</strong>
+            </div>
+          </div>
+
+          <a
+            href="#"
+            class="btn webnamoro-buy-btn webnamoro-featured-btn comprar-btn"
+            data-produto="Web Namoro - 1 Mês Completo"
+            data-preco="149.90"
+            data-imagem="https://placehold.co/220x220/png"
+            data-descricao="Web Namoro com duração de 1 mês completo."
+          >
+            Escolher plano
+          </a>
+        </div>
+      </article>
+
+      <div class="webnamoro-grid">
+        <article class="webnamoro-plan-card">
+          <h3>1 Dia Completo</h3>
+          <p>Pra quem quer experimentar e ver como é me ter como sua putinha mesmo que por pouco tempo, benefícios ao final do site</p>
+          <strong class="webnamoro-plan-price">R$ 49,90</strong>
+          <a
+            href="#"
+            class="btn webnamoro-buy-btn comprar-btn"
+            data-produto="Web Namoro - 1 Dia Completo"
+            data-preco="49.90"
+            data-imagem="https://placehold.co/220x220/png"
+            data-descricao="Web Namoro com duração de 1 dia completo."
+          >
+            Escolher
+          </a>
+        </article>
+
+        <article class="webnamoro-plan-card">
+          <h3>2 Dias Completo</h3>
+          <p>Pra quem quer experimentar e ver como é me ter como sua putinha mesmo que por pouco tempo, benefícios ao final do site</p>
+          <strong class="webnamoro-plan-price">R$ 59,90</strong>
+          <a
+            href="#"
+            class="btn webnamoro-buy-btn comprar-btn"
+            data-produto="Web Namoro - 2 Dias Completo"
+            data-preco="59.90"
+            data-imagem="https://placehold.co/220x220/png"
+            data-descricao="Web Namoro com duração de 2 dias completos."
+          >
+            Escolher
+          </a>
+        </article>
+
+        <article class="webnamoro-plan-card webnamoro-plan-card-highlight">
+          <span class="webnamoro-plan-badge">Mais escolhido</span>
+          <h3>1 Semana Completo</h3>
+          <p>Pra quem quer uma experiência mais completa e ter a melhor semana de prazer da sua vida, benefícios ao final do site</p>
+          <strong class="webnamoro-plan-price">R$ 79,99</strong>
+          <a
+            href="#"
+            class="btn webnamoro-buy-btn comprar-btn"
+            data-produto="Web Namoro - 1 Semana Completo"
+            data-preco="79.99"
+            data-imagem="https://placehold.co/220x220/png"
+            data-descricao="Web Namoro com duração de 1 semana completa."
+          >
+            Escolher
+          </a>
+        </article>
+
+        <article class="webnamoro-plan-card">
+          <h3>2 Semanas Completo</h3>
+          <p>Pra quem quer uma experiência mais completa e ter a melhores semanas de prazer da sua vida, benefícios ao final do site</p>
+          <strong class="webnamoro-plan-price">R$ 99,90</strong>
+          <a
+            href="#"
+            class="btn webnamoro-buy-btn comprar-btn"
+            data-produto="Web Namoro - 2 Semanas Completo"
+            data-preco="99.90"
+            data-imagem="https://placehold.co/220x220/png"
+            data-descricao="Web Namoro com duração de 2 semanas completas."
+          >
+            Escolher
+          </a>
+        </article>
+      </div>
+
+      <div class="webnamoro-info-grid">
+        <article class="webnamoro-info-card">
+          <div class="webnamoro-info-icon">♡</div>
+          <h3>O que é?</h3>
+          <p>
+            Uma experiência online mais próxima e carinhosa, com presença, troca de mensagens e momentos especiais criados de forma personalizada.
+          </p>
+        </article>
+
+        <article class="webnamoro-info-card">
+          <div class="webnamoro-info-icon">✦</div>
+          <h3>O que está incluso?</h3>
+          <p>
+            Conversas díarias, fotinhas e vídeozinhos exclusivos, prévias de packs, xca's todas as semanas, conversar putaria sempre que você quiser, jogar joguinhos juntos e etc
+        </article>
+
+        <article class="webnamoro-info-card">
+          <div class="webnamoro-info-icon">⌁</div>
+          <h3>Regras básicas</h3>
+          <p>
+            Respeito sempre, nada fora do combinado e tudo dentro dos limites definidos, com clareza e discrição.
+          </p>
+        </article>
+      </div>
+
+      <div class="webnamoro-cta-wrap">
+        <a
+          href="#"
+          class="btn webnamoro-cta-btn comprar-btn"
+          data-produto="Web Namoro - 1 Semana Completo"
+          data-preco="79.99"
+          data-imagem="https://placehold.co/220x220/png"
+          data-descricao="Web Namoro com duração de 1 semana completa."
+        >
+          Quero começar agora
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer footer-soft footer-refined">
+  <div class="container footer-refined-grid">
+    <div class="footer-brand">
+      <h2>Laurete<span>Privé</span></h2>
+      <p>Experiência exclusiva para maiores de 18 anos, com packs, VIP e experiências personalizadas.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Web Namoro</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Acesso rápido</h4>
+      <a href="https://discord.gg/bqaJ8bDX3G" target="_blank">Discord</a>
+      <a href="https://t.me/LauretePriveBot?start=ch" target="_blank">Telegram</a>
+      <a href="#planos-webnamoro">Ver planos</a>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+</script>
+</body>
+</html>

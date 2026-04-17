@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#14171d" />
+  <title>Laurete Privé | Serviços</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="header header-soft">
+  <div class="container nav nav-refined">
+    <h1 class="logo logo-soft">
+      <a href="index.html" class="logo-wrap">
+  <span class="logo-lollipop">🍭</span>
+  Laurete<span>Privé</span>
+</a>
+    </h1>
+
+    <nav class="nav-desktop nav-desktop-refined">
+      <ul class="menu menu-soft menu-refined">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="amostras.html">Amostras</a></li>
+        <li><a href="packs.html">Packs</a></li>
+        <li><a href="vip.html">VIP</a></li>
+        <li><a href="servicos.html" class="ativo">Serviços</a></li>
+        <li><a href="webnamoro.html">Webnamoro</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="servicos.html" class="btn btn-topo nav-desktop-btn btn-gradient-soft">Serviços</a>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        🌙
+      </button>
+
+      <button class="mobile-menu-btn mobile-menu-soft" id="mobileMenuBtn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu-panel mobile-menu-panel-soft" id="mobileMenuPanel">
+    <div class="mobile-menu-inner">
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <a href="servicos.html" class="mobile-menu-cta">Ver serviços</a>
+    </div>
+  </div>
+</header>
+
+<main class="servicos-premium-page">
+  <section class="servicos-premium-hero">
+    <div class="container">
+      <p class="tag">Serviços</p>
+      <h2 class="page-title">Experiências mais exclusivas e personalizadas</h2>
+      <p class="desc center">
+        Interações diretas e conteúdos sob medida para você.
+      </p>
+    </div>
+  </section>
+
+  <section class="servicos-premium-section">
+    <div class="container">
+      <div class="servicos-premium-grid">
+
+        <article class="servico-premium-card servico-premium-featured">
+          <span class="servico-premium-badge">Mais intenso</span>
+
+          <div class="servico-premium-top">
+            <div class="servico-premium-title-area">
+              <div class="servico-premium-icon">✦</div>
+
+              <div>
+                <h3>Xcam</h3>
+                <p class="servico-premium-text">
+                  Chamada ao vivo com interação direta e personalizada, em uma experiência mais intensa.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="servico-premium-details">
+            <h4>Detalhes:</h4>
+            <ul class="servico-premium-list">
+              <li>Tempo exclusivo</li>
+              <li>Masturbação em tempo real</li>
+              <li>Experiência mais intensa</li>
+            </ul>
+          </div>
+
+          <div class="tempo-escolha">
+            <p class="avaliacao-escolha-label">Escolha o tempo:</p>
+
+            <div class="avaliacao-opcoes">
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-xcam" value="3" data-preco="14.90" checked>
+                <span>3 min</span>
+              </label>
+
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-xcam" value="5" data-preco="24.90">
+                <span>5 min</span>
+              </label>
+
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-xcam" value="10" data-preco="34.90">
+                <span>10 min</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="servico-premium-bottom">
+            <div class="servico-premium-price-wrap">
+              <span>Preço:</span>
+              <strong class="servico-premium-price" id="preco-xcam">R$ 14,90</strong>
+            </div>
+          </div>
+
+          <a
+            href="#"
+            class="btn servico-premium-btn comprar-xcam-btn"
+            data-produto="Xcam"
+            data-imagem="https://placehold.co/220x220/png"
+          >
+            Agendar Xcam
+          </a>
+        </article>
+
+        <article class="servico-premium-card">
+          <div class="servico-premium-top">
+            <div class="servico-premium-title-area">
+              <div class="servico-premium-icon">◈</div>
+
+              <div>
+                <h3>Sexting</h3>
+                <p class="servico-premium-text">
+                  Conversa de putaria direta, quente e personalizada, com até 5 mídias inclusas durante a experiência.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="servico-premium-details">
+            <h4>Detalhes:</h4>
+            <ul class="servico-premium-list">
+              <li>Conversa de putaria personalizada</li>
+              <li>Clima mais íntimo e direto</li>
+              <li>Até 5 mídias inclusas</li>
+            </ul>
+          </div>
+
+          <div class="tempo-escolha">
+            <p class="avaliacao-escolha-label">Escolha o tempo:</p>
+
+            <div class="avaliacao-opcoes">
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-sexting" value="5" data-preco="14.90" checked>
+                <span>5 min</span>
+              </label>
+
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-sexting" value="10" data-preco="24.90">
+                <span>10 min</span>
+              </label>
+
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-sexting" value="15" data-preco="29.90">
+                <span>15 min</span>
+              </label>
+
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tempo-sexting" value="30" data-preco="49.90">
+                <span>30 min</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="servico-premium-bottom">
+            <div class="servico-premium-price-wrap">
+              <span>Preço:</span>
+              <strong class="servico-premium-price" id="preco-sexting">R$ 14,90</strong>
+            </div>
+          </div>
+
+          <a
+            href="#"
+            class="btn servico-premium-btn comprar-sexting-btn"
+            data-produto="Sexting"
+            data-imagem="https://placehold.co/220x220/png"
+          >
+            Começar agora
+          </a>
+        </article>
+
+        <article class="servico-premium-card">
+          <div class="servico-premium-top">
+            <div class="servico-premium-title-area">
+              <div class="servico-premium-icon">✧</div>
+
+              <div>
+                <h3>Avaliação</h3>
+                <p class="servico-premium-text">
+                  Feedback exclusivo e direto, com análise personalizada em texto ou áudio.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="servico-premium-details">
+            <h4>Detalhes:</h4>
+            <ul class="servico-premium-list">
+              <li>Opção em áudio ou texto</li>
+              <li>Resposta personalizada</li>
+              <li>Mais direto e objetivo</li>
+            </ul>
+          </div>
+
+          <div class="avaliacao-escolha">
+            <p class="avaliacao-escolha-label">Escolha o formato:</p>
+
+            <div class="avaliacao-opcoes">
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tipo-avaliacao" value="Texto" data-preco="7.90" checked>
+                <span>Texto</span>
+              </label>
+
+              <label class="avaliacao-opcao">
+                <input type="radio" name="tipo-avaliacao" value="Áudio" data-preco="14.90">
+                <span>Áudio</span>
+              </label>
+            </div>
+
+            <p class="avaliacao-bonus">+ 1 pack de brinde no áudio 🎁</p>
+          </div>
+
+          <div class="servico-premium-bottom">
+            <div class="servico-premium-price-wrap">
+              <span>Preço:</span>
+              <strong class="servico-premium-price" id="preco-avaliacao">R$ 7,90</strong>
+            </div>
+          </div>
+
+          <a
+            href="#"
+            class="btn servico-premium-btn comprar-avaliacao-btn"
+            data-produto="Avaliação"
+            data-imagem="https://placehold.co/220x220/png"
+          >
+            Solicitar avaliação
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer footer-soft footer-refined">
+  <div class="container footer-refined-grid">
+
+    <div class="footer-brand">
+      <h2>Laurete<span>Privé</span></h2>
+      <p>Experiência exclusiva para maiores de 18 anos, com packs, VIP e serviços personalizados.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <a href="index.html">Início</a>
+      <a href="amostras.html">Amostras</a>
+      <a href="packs.html">Packs</a>
+      <a href="vip.html">VIP</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Acesso rápido</h4>
+      <a href="https://discord.gg/bqaJ8bDX3G" target="_blank">Discord</a>
+      <a href="https://t.me/LauretePriveBot?start=ch" target="_blank">Telegram</a>
+      <a href="servicos.html">Ver serviços</a>
+    </div>
+
+  </div>
+
+  <div class="container footer-bottom">
+    <p>Plataforma exclusiva para maiores de 18 anos.</p>
+    <p class="copy">© 2026 - Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  function formatarPreco(preco) {
+    return `R$ ${preco.replace(".", ",")}`;
+  }
+
+  function atualizarPreco(name, precoId) {
+    const radios = document.querySelectorAll(`input[name="${name}"]`);
+    const precoEl = document.getElementById(precoId);
+
+    if (!precoEl) return;
+
+    radios.forEach((radio) => {
+      radio.addEventListener("change", () => {
+        const preco = radio.dataset.preco || "0.00";
+        precoEl.textContent = formatarPreco(preco);
+      });
+    });
+  }
+
+  atualizarPreco("tempo-xcam", "preco-xcam");
+  atualizarPreco("tempo-sexting", "preco-sexting");
+  atualizarPreco("tipo-avaliacao", "preco-avaliacao");
+
+  // 🔥 LINKS CERTOS
+  const links = {
+    xcam: {
+      "3": "https://p.hoopay.com.br/v/296289891381376",
+      "5": "https://p.hoopay.com.br/v/296290115379328",
+      "10": "https://p.hoopay.com.br/v/296290194382976"
+    },
+    sexting: {
+      "5": "https://p.hoopay.com.br/v/296290698485888",
+      "10": "https://p.hoopay.com.br/v/296290755453056",
+      "15": "https://p.hoopay.com.br/v/296290809573504",
+      "30": "https://p.hoopay.com.br/v/296290873004160"
+    },
+    avaliacao: {
+      "Texto": "https://p.hoopay.com.br/v/296290969055360",
+      "Áudio": "https://p.hoopay.com.br/v/296291035541632"
+    }
+  };
+
+  // 🔥 XCAM
+  const btnXcam = document.querySelector(".comprar-xcam-btn");
+  if (btnXcam) {
+    btnXcam.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const selecionado = document.querySelector('input[name="tempo-xcam"]:checked');
+      const tempo = selecionado.value;
+      const preco = selecionado.dataset.preco;
+
+      const produto = `Xcam - ${tempo} min`;
+      const descricao = `Xcam com duração de ${tempo} minutos.`;
+
+      const checkoutUrl =
+        `checkout.html?produto=${encodeURIComponent(produto)}` +
+        `&preco=${encodeURIComponent(preco)}` +
+        `&descricao=${encodeURIComponent(descricao)}` +
+        `&pagamento=${encodeURIComponent(links.xcam[tempo])}`;
+
+      window.location.href = checkoutUrl;
+    });
+  }
+
+  // 🔥 SEXTING
+  const btnSexting = document.querySelector(".comprar-sexting-btn");
+  if (btnSexting) {
+    btnSexting.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const selecionado = document.querySelector('input[name="tempo-sexting"]:checked');
+      const tempo = selecionado.value;
+      const preco = selecionado.dataset.preco;
+
+      const produto = `Sexting - ${tempo} min`;
+      const descricao = `Sexting com duração de ${tempo} minutos.`;
+
+      const checkoutUrl =
+        `checkout.html?produto=${encodeURIComponent(produto)}` +
+        `&preco=${encodeURIComponent(preco)}` +
+        `&descricao=${encodeURIComponent(descricao)}` +
+        `&pagamento=${encodeURIComponent(links.sexting[tempo])}`;
+
+      window.location.href = checkoutUrl;
+    });
+  }
+
+  // 🔥 AVALIAÇÃO
+  const btnAvaliacao = document.querySelector(".comprar-avaliacao-btn");
+  if (btnAvaliacao) {
+    btnAvaliacao.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const selecionado = document.querySelector('input[name="tipo-avaliacao"]:checked');
+      const tipo = selecionado.value;
+      const preco = selecionado.dataset.preco;
+
+      const produto = `Avaliação - ${tipo}`;
+      const descricao = `Avaliação personalizada em ${tipo}.`;
+
+      const checkoutUrl =
+        `checkout.html?produto=${encodeURIComponent(produto)}` +
+        `&preco=${encodeURIComponent(preco)}` +
+        `&descricao=${encodeURIComponent(descricao)}` +
+        `&pagamento=${encodeURIComponent(links.avaliacao[tipo])}`;
+
+      window.location.href = checkoutUrl;
+    });
+  }
+
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+});
+</script>
+</body>
+</html>

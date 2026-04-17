@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#14171d">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#14171d" />
   <title>Laurete Privé | VIP</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+      }
+    })();
+  </script>
+
+  <style>
+    html {
+      background: #14171d;
+    }
+
+    html:not(.page-ready) body {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    html.page-ready body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.18s ease;
+    }
+  </style>
+
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
 <header class="header header-soft">
   <div class="container nav nav-refined">
     <h1 class="logo logo-soft">
-      <a href="index.html">Laurete<span>Privé</span></a>
+      <a href="index.html" class="logo-wrap">
+        <span class="logo-lollipop">🍭</span>
+        Laurete<span>Privé</span>
+      </a>
     </h1>
 
     <nav class="nav-desktop nav-desktop-refined">
@@ -21,7 +52,8 @@
         <li><a href="amostras.html">Amostras</a></li>
         <li><a href="packs.html">Packs</a></li>
         <li><a href="vip.html" class="ativo">VIP</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="webnamoro.html">Webnamoro</a></li>
       </ul>
     </nav>
 
@@ -46,7 +78,8 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="webnamoro.html">Webnamoro</a>
 
       <div class="mobile-menu-divider"></div>
 
@@ -96,14 +129,21 @@
           </ul>
         </div>
 
-        <div class="vip-premium-bottom">
-          <div class="vip-premium-price-wrap">
-            <span>Preço:</span>
+        <div class="vip-premium-bottom vip-premium-bottom-promo">
+          <div>
+            <span class="vip-premium-price-label">Oferta especial:</span>
+            <p class="vip-premium-old-price">De R$ 79,90</p>
+          </div>
+
+          <div class="vip-premium-price-box">
+            <span class="vip-premium-discount">PROMOÇÃO</span>
             <strong class="vip-premium-price">R$ 49,90</strong>
           </div>
         </div>
 
-        <a href="#" class="btn vip-premium-btn">Quero o mensal</a>
+        <p class="vip-premium-urgency">Acesso VIP com valor promocional por tempo limitado.</p>
+
+        <a href="checkout.html?produto=VIP%20Mensal&preco=49.90&descricao=Acesso%20VIP%20por%2030%20dias.&pagamento=https%3A%2F%2Ft.me%2FLauretePriveBot%3Fstart%3Dch" class="btn vip-premium-btn">Quero o mensal</a>
       </article>
 
       <div class="vip-premium-grid">
@@ -136,7 +176,7 @@
             </div>
           </div>
 
-          <a href="#" class="btn vip-premium-btn">Entrar no semanal</a>
+          <a href="checkout.html?produto=VIP%20Semanal&preco=29.90&descricao=Acesso%20VIP%20por%207%20dias.&pagamento=https%3A%2F%2Ft.me%2FLauretePriveBot%3Fstart%3Dch" class="btn vip-premium-btn">Entrar no semanal</a>
         </article>
 
         <article class="vip-premium-card">
@@ -170,7 +210,7 @@
             </div>
           </div>
 
-          <a href="#" class="btn vip-premium-btn">Quero acesso vitalício</a>
+          <a href="checkout.html?produto=VIP%20Vital%C3%ADcio&preco=79.90&descricao=Acesso%20VIP%20vital%C3%ADcio.&pagamento=https%3A%2F%2Ft.me%2FLauretePriveBot%3Fstart%3Dch" class="btn vip-premium-btn">Quero acesso vitalício</a>
         </article>
       </div>
 
@@ -201,13 +241,12 @@
       <a href="amostras.html">Amostras</a>
       <a href="packs.html">Packs</a>
       <a href="vip.html">VIP</a>
-      <a href="perfil.html">Perfil</a>
     </div>
 
     <div class="footer-links">
       <h4>Acesso rápido</h4>
-      <a href="https://discord.gg/SEU_LINK" target="_blank">Discord</a>
-      <a href="https://t.me/SEU_LINK" target="_blank">Telegram</a>
+      <a href="https://discord.gg/bqaJ8bDX3G" target="_blank">Discord</a>
+      <a href="https://t.me/LauretePriveBot?start=ch" target="_blank">Telegram</a>
       <a href="vip.html">Assinar agora</a>
     </div>
 
@@ -219,6 +258,12 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+<script>
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("page-ready");
+  });
+</script>
 </body>
 </html>

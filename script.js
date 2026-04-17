@@ -1,6 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   /* =========================
-     FEED / VIDEOS / OVERLAYS
+     TEMA
+  ========================= */
+  const html = document.documentElement;
+  const body = document.body;
+  const themeToggle = document.getElementById("themeToggle");
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function applyTheme(theme) {
+    const isDark = theme === "dark";
+
+    html.classList.toggle("dark-mode", isDark);
+    body.classList.toggle("dark-mode", isDark);
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    if (themeToggle) {
+      themeToggle.textContent = isDark ? "☀️" : "🌙";
+    }
+
+    if (themeMeta) {
+      themeMeta.setAttribute("content", isDark ? "#14171d" : "#fffafb");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  applyTheme(savedTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isDark = html.classList.contains("dark-mode");
+      applyTheme(isDark ? "light" : "dark");
+    });
+  }
+
+  /* =========================
+     FEED ANTIGO / VIDEOS / OVERLAYS
   ========================= */
   const feedItems = document.querySelectorAll(".feed-item");
 
@@ -36,6 +71,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* =========================
+     COMPRA / CHECKOUT
+  ========================= */
+  document.querySelectorAll(".comprar-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const produto = btn.dataset.produto || "Produto";
+      const preco = btn.dataset.preco || "0.00";
+      const imagem = btn.dataset.imagem || "https://placehold.co/220x220/png";
+      const descricao = btn.dataset.descricao || "Conteúdo exclusivo e sem censura";
+
+      const checkoutUrl =
+        `checkout.html?produto=${encodeURIComponent(produto)}` +
+        `&preco=${encodeURIComponent(preco)}` +
+        `&imagem=${encodeURIComponent(imagem)}` +
+        `&descricao=${encodeURIComponent(descricao)}`;
+
+      window.location.href = checkoutUrl;
+    });
+  });
+
+  /* =========================
+     AMOSTRAS / SOM / OVERLAY
+  ========================= */
   const videos = document.querySelectorAll(".amostra-video");
   let videoComSomAtivo = null;
 
@@ -47,7 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const somBtn = wrap.querySelector(".som-btn");
     const lockPoint = Number(video.dataset.lock || 0.78);
 
-    video.currentTime = 0;
+    try {
+      video.currentTime = 0;
+    } catch (_) {}
 
     video.addEventListener("click", () => {
       if (overlay && !overlay.classList.contains("hidden")) return;
@@ -155,320 +217,47 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileMenuPanel.classList.toggle("open");
       mobileMenuPanel.classList.toggle("is-open");
     });
-  }
 
-  /* =========================
-     TEMA
-  ========================= */
-  const themeToggle = document.getElementById("themeToggle");
-
-  if (!localStorage.getItem("theme")) {
-    localStorage.setItem("theme", "dark");
-  }
-
-  function aplicarTemaSalvo() {
-    const temaSalvo = localStorage.getItem("theme");
-
-    if (temaSalvo === "light") {
-      document.body.classList.remove("dark-mode");
-      if (themeToggle) themeToggle.textContent = "🌙";
-    } else {
-      document.body.classList.add("dark-mode");
-      if (themeToggle) themeToggle.textContent = "☀️";
-    }
-  }
-
-  aplicarTemaSalvo();
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const ativouDark = document.body.classList.toggle("dark-mode");
-      themeToggle.textContent = ativouDark ? "☀️" : "🌙";
-      localStorage.setItem("theme", ativouDark ? "dark" : "light");
-    });
-  }
-
-  /* =========================
-     PERFIL - EDITAR NOME/FOTO
-  ========================= */
-  const perfilModalOverlay = document.getElementById("perfil-modal-overlay");
-  const fecharModalPerfil = document.getElementById("fechar-modal-perfil");
-  const cancelarModalPerfil = document.getElementById("cancelar-modal-perfil");
-  const perfilEditForm = document.getElementById("perfil-edit-form");
-  const editNomeInput = document.getElementById("edit-nome");
-  const editAvatarInput = document.getElementById("edit-avatar");
-  const perfilAvatarPreview = document.getElementById("perfil-avatar-preview");
-  const salvarPerfilBtn = document.getElementById("salvar-perfil-btn");
-  const editarPerfilBtn = document.getElementById("editar-perfil-btn");
-
-  const perfilAvatar = document.getElementById("perfil-avatar");
-  const perfilNome = document.getElementById("perfil-nome");
-  const perfilEmail = document.getElementById("perfil-email");
-
-  const PERFIL_SUPABASE_URL = "https://ndazcilxpjyenkymqltc.supabase.co";
-  const PERFIL_SUPABASE_KEY = "sb_publishable_bAojqWTshY-UjOb_Q-0wnw_FuZ-MjC9";
-
-  let supabasePerfil = null;
-  let usuarioAtual = null;
-  let perfilAtual = null;
-
-  function getInitials(name, email) {
-    if (name && name.trim()) {
-      const parts = name.trim().split(" ").filter(Boolean);
-
-      if (parts.length === 1) {
-        return parts[0].slice(0, 2).toUpperCase();
-      }
-
-      return (parts[0][0] + parts[1][0]).toUpperCase();
-    }
-
-    if (email) {
-      return email.slice(0, 2).toUpperCase();
-    }
-
-    return "JP";
-  }
-
-  function renderAvatar(element, nome, email, avatarUrl) {
-    if (!element) return;
-
-    if (avatarUrl) {
-      element.innerHTML = `<img src="${avatarUrl}" alt="Foto de perfil">`;
-    } else {
-      element.textContent = getInitials(nome, email);
-    }
-  }
-
-  async function initSupabasePerfil() {
-    if (!window.supabase) return null;
-    if (supabasePerfil) return supabasePerfil;
-
-    supabasePerfil = window.supabase.createClient(
-      PERFIL_SUPABASE_URL,
-      PERFIL_SUPABASE_KEY
-    );
-
-    return supabasePerfil;
-  }
-
-  async function buscarPerfil(userId) {
-  const client = await initSupabasePerfil();
-  if (!client) return null;
-
-  const { data, error } = await client
-    .from("profiles")
-    .select("id, nome, avatar_url")
-    .eq("id", userId)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Erro ao buscar perfil:", error);
-    return null;
-  }
-
-  return data;
-}
-
-  async function carregarUsuarioPerfil() {
-    if (!editarPerfilBtn) return;
-
-    const client = await initSupabasePerfil();
-    if (!client) return;
-
-    const { data, error } = await client.auth.getUser();
-
-    if (error || !data.user) return;
-
-    usuarioAtual = data.user;
-    perfilAtual = await buscarPerfil(usuarioAtual.id);
-
-    if (!perfilAtual) {
-      const { error: upsertError } = await client
-        .from("profiles")
-        .upsert(
-          {
-            id: usuarioAtual.id,
-            nome: usuarioAtual.user_metadata?.nome || "Cliente",
-            avatar_url: null
-          },
-          { onConflict: "id" }
-        );
-
-      if (upsertError) {
-        console.error("Erro ao criar perfil inicial:", upsertError);
-        return;
-      }
-
-      perfilAtual = await buscarPerfil(usuarioAtual.id);
-    }
-
-    const nome = perfilAtual?.nome || usuarioAtual.user_metadata?.nome || "Cliente";
-    const email = usuarioAtual.email || "";
-    const avatarUrl = perfilAtual?.avatar_url || "";
-
-    if (perfilNome) {
-      perfilNome.innerHTML = `${nome} <span>• Cliente</span>`;
-    }
-
-    if (perfilEmail) {
-      perfilEmail.textContent = email;
-    }
-
-    renderAvatar(perfilAvatar, nome, email, avatarUrl);
-  }
-
-  function abrirModalPerfil() {
-    if (!perfilModalOverlay || !editNomeInput || !perfilAvatarPreview) return;
-    if (!usuarioAtual) return;
-
-    const nome = perfilAtual?.nome || usuarioAtual.user_metadata?.nome || "";
-    const email = usuarioAtual.email || "";
-    const avatarUrl = perfilAtual?.avatar_url || "";
-
-    editNomeInput.value = nome;
-    if (editAvatarInput) editAvatarInput.value = "";
-
-    renderAvatar(perfilAvatarPreview, nome, email, avatarUrl);
-    perfilModalOverlay.classList.add("ativo");
-  }
-
-  function fecharModalEditarPerfil() {
-    if (perfilModalOverlay) {
-      perfilModalOverlay.classList.remove("ativo");
-    }
-  }
-
-  async function uploadAvatar(userId, file) {
-    const client = await initSupabasePerfil();
-    if (!client) throw new Error("Supabase não disponível");
-
-    const extensao = file.name.split(".").pop()?.toLowerCase() || "jpg";
-    const nomeArquivo = `${userId}-${Date.now()}.${extensao}`;
-
-    const { error: uploadError } = await client.storage
-      .from("avatars")
-      .upload(nomeArquivo, file, {
-        upsert: true,
-        contentType: file.type
+    mobileMenuPanel.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenuBtn.classList.remove("active");
+        mobileMenuPanel.classList.remove("open");
+        mobileMenuPanel.classList.remove("is-open");
       });
-
-    if (uploadError) throw uploadError;
-
-    const { data } = client.storage
-      .from("avatars")
-      .getPublicUrl(nomeArquivo);
-
-    return data.publicUrl;
-  }
-
-  if (editarPerfilBtn) {
-    editarPerfilBtn.addEventListener("click", () => {
-      abrirModalPerfil();
     });
   }
 
-  if (fecharModalPerfil) {
-    fecharModalPerfil.addEventListener("click", fecharModalEditarPerfil);
-  }
+  /* =========================
+     TRANSIÇÃO ENTRE PÁGINAS
+  ========================= */
+  const links = document.querySelectorAll("a[href]");
 
-  if (cancelarModalPerfil) {
-    cancelarModalPerfil.addEventListener("click", fecharModalEditarPerfil);
-  }
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
 
-  if (perfilModalOverlay) {
-    perfilModalOverlay.addEventListener("click", (e) => {
-      if (e.target === perfilModalOverlay) {
-        fecharModalEditarPerfil();
-      }
-    });
-  }
-
-  if (editAvatarInput) {
-    editAvatarInput.addEventListener("change", () => {
-      const file = editAvatarInput.files?.[0];
-      const nome = editNomeInput?.value || perfilAtual?.nome || usuarioAtual?.user_metadata?.nome || "";
-      const email = usuarioAtual?.email || "";
-
-      if (!file) {
-        renderAvatar(perfilAvatarPreview, nome, email, perfilAtual?.avatar_url || "");
+      if (
+        !href ||
+        href.startsWith("#") ||
+        href.startsWith("javascript:") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        link.target === "_blank" ||
+        link.hasAttribute("download")
+      ) {
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (perfilAvatarPreview) {
-          perfilAvatarPreview.innerHTML = `<img src="${e.target.result}" alt="Prévia do avatar">`;
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  }
+      const url = new URL(href, window.location.href);
 
-  if (perfilEditForm) {
-    perfilEditForm.addEventListener("submit", async (e) => {
+      if (url.origin !== window.location.origin) return;
+
       e.preventDefault();
+      body.classList.add("page-leaving");
 
-      if (!usuarioAtual) return;
-
-      const client = await initSupabasePerfil();
-      if (!client) return;
-
-      const novoNome = editNomeInput ? editNomeInput.value.trim() : "";
-      const novoAvatar = editAvatarInput?.files?.[0];
-
-      if (salvarPerfilBtn) {
-        salvarPerfilBtn.disabled = true;
-        salvarPerfilBtn.textContent = "Salvando...";
-      }
-
-      try {
-        let avatarUrl = perfilAtual?.avatar_url || null;
-
-        if (novoAvatar) {
-          avatarUrl = await uploadAvatar(usuarioAtual.id, novoAvatar);
-        }
-
-        const { error } = await client
-          .from("profiles")
-          .upsert(
-            {
-              id: usuarioAtual.id,
-              nome: novoNome || "Cliente",
-              avatar_url: avatarUrl
-            },
-            { onConflict: "id" }
-          );
-
-        if (error) throw error;
-
-        perfilAtual = await buscarPerfil(usuarioAtual.id);
-
-        const nomeAtualizado = perfilAtual?.nome || "Cliente";
-        const emailAtualizado = usuarioAtual.email || "";
-        const avatarAtualizado = perfilAtual?.avatar_url || "";
-
-        if (perfilNome) {
-          perfilNome.innerHTML = `${nomeAtualizado} <span>• Cliente</span>`;
-        }
-
-        if (perfilEmail) {
-          perfilEmail.textContent = emailAtualizado;
-        }
-
-        renderAvatar(perfilAvatar, nomeAtualizado, emailAtualizado, avatarAtualizado);
-        fecharModalEditarPerfil();
-      } catch (error) {
-        console.error("ERRO AO SALVAR PERFIL:", error);
-        alert("ERRO AO SALVAR PERFIL:\n\n" + (error?.message || JSON.stringify(error)));
-      } finally {
-        if (salvarPerfilBtn) {
-          salvarPerfilBtn.disabled = false;
-          salvarPerfilBtn.textContent = "Salvar alterações";
-        }
-      }
+      setTimeout(() => {
+        window.location.href = url.href;
+      }, 180);
     });
-  }
-
-  carregarUsuarioPerfil();
+  });
 });
