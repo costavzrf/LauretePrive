@@ -264,14 +264,6 @@
     const descricao = params.get("descricao") || "Conteúdo exclusivo e sem censura";
     const pagamento = params.get("pagamento") || "";
 
-    const linksPagamento = {
-      "pack bronze": "LINK_DO_BRONZE",
-      "pack prata": "LINK_DO_PRATA",
-      "combo gold": "https://pay.hoopay.com.br/?productId[]=295851132899456&qty[]=1",
-      "pack premium": "LINK_DO_PREMIUM",
-      "vip mensal": "LINK_DO_VIP"
-    };
-
     function normalizarTexto(texto) {
       return (texto || "")
         .normalize("NFD")
