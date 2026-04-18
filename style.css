@@ -9374,3 +9374,57 @@ section,
   position: static !important;
   margin-left: 8px !important;
 }
+/* === FIX CORAÇÕES CHECKOUT (mobile + iphone) === */
+
+/* remove emoji antigo */
+.checkout-hero-box::before,
+.checkout-hero-box::after {
+  content: "" !important;
+}
+
+/* cria corações decorativos bonitos */
+.checkout-hero-box {
+  position: relative;
+}
+
+.checkout-hero-box::before,
+.checkout-hero-box::after {
+  content: "♥";
+  position: absolute;
+  font-size: 42px;
+  color: rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* posição */
+.checkout-hero-box::before {
+  top: 18px;
+  left: 24px;
+}
+
+.checkout-hero-box::after {
+  top: 18px;
+  right: 24px;
+}
+
+/* responsivo mobile (menor e mais suave) */
+@media (max-width: 768px) {
+  .checkout-hero-box::before,
+  .checkout-hero-box::after {
+    font-size: 28px;
+    opacity: 0.5;
+  }
+
+  .checkout-hero-box::before {
+    top: 12px;
+    left: 16px;
+  }
+
+  .checkout-hero-box::after {
+    top: 12px;
+    right: 16px;
+  }
+}

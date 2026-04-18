@@ -184,12 +184,12 @@
           <span class="webnamoro-plan-badge">Mais escolhido</span>
           <h3>1 Semana Completo</h3>
           <p>Pra quem quer uma experiência mais completa e ter a melhor semana de prazer da sua vida, benefícios ao final do site</p>
-          <strong class="webnamoro-plan-price">R$ 79,99</strong>
+          <strong class="webnamoro-plan-price">R$ 79,90</strong>
           <a
             href="#"
             class="btn webnamoro-buy-btn comprar-btn"
             data-produto="Web Namoro - 1 Semana Completo"
-            data-preco="79.99"
+            data-preco="79.90"
             data-imagem="https://placehold.co/220x220/png"
             data-descricao="Web Namoro com duração de 1 semana completa."
           >
@@ -244,7 +244,7 @@
           href="#"
           class="btn webnamoro-cta-btn comprar-btn"
           data-produto="Web Namoro - 1 Semana Completo"
-          data-preco="79.99"
+          data-preco="79.90"
           data-imagem="https://placehold.co/220x220/png"
           data-descricao="Web Namoro com duração de 1 semana completa."
         >
@@ -287,10 +287,49 @@
 </footer>
 
 <script src="script.js"></script>
+
 <script>
-  window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const linksWebnamoro = {
+    "Web Namoro - 1 Mês Completo": "https://p.hoopay.com.br/v/296554251866240",
+    "Web Namoro - 1 Dia Completo": "https://p.hoopay.com.br/v/296554434248832",
+    "Web Namoro - 2 Dias Completo": "https://p.hoopay.com.br/v/296554655252608",
+    "Web Namoro - 1 Semana Completo": "https://p.hoopay.com.br/v/296555033030784",
+    "Web Namoro - 2 Semanas Completo": "https://p.hoopay.com.br/v/296557862424704"
+  };
+
+  const buttons = document.querySelectorAll(".comprar-btn");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const produto = (btn.dataset.produto || "").trim();
+      const preco = (btn.dataset.preco || "0.00").trim();
+      const imagem = (btn.dataset.imagem || "https://placehold.co/220x220/png").trim();
+      const descricao = (btn.dataset.descricao || "Experiência personalizada de Web Namoro.").trim();
+      const pagamento = linksWebnamoro[produto] || "";
+
+      if (!pagamento) {
+        alert("Não foi possível encontrar o link de pagamento para: " + produto);
+        return;
+      }
+
+      const checkoutUrl =
+        `checkout.html?produto=${encodeURIComponent(produto)}` +
+        `&preco=${encodeURIComponent(preco)}` +
+        `&imagem=${encodeURIComponent(imagem)}` +
+        `&descricao=${encodeURIComponent(descricao)}` +
+        `&pagamento=${encodeURIComponent(pagamento)}`;
+
+      window.location.href = checkoutUrl;
+    });
+  });
+
+  window.addEventListener("DOMContentLoaded", () => {
     document.documentElement.classList.add("page-ready");
   });
+});
 </script>
 </body>
 </html>
