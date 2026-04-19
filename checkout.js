@@ -1,8 +1,6 @@
-const supabaseUrl = "https://ndazcilxpjyenkymqltc.supabase.co";
-const supabaseKey = "sb_publishable_bAojqWTshY-UjOb_Q-0wnw_FuZ-MjC9";
-const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const html = document.documentElement;
+  const body = document.body;
   const themeToggle = document.getElementById("themeToggle");
   const produtoEl = document.getElementById("checkoutProduto");
   const precoEl = document.getElementById("checkoutPreco");
@@ -12,22 +10,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   const descricaoEl = document.getElementById("checkoutDescricao");
   const btn = document.getElementById("checkoutFinalizarBtn");
   const countdownEl = document.getElementById("checkoutCountdown");
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-  if (!localStorage.getItem("theme")) {
-    localStorage.setItem("theme", "dark");
+  function liberarPagina() {
+    html.classList.add("page-ready");
   }
 
-  function aplicarTemaSalvo() {
-    const temaSalvo = localStorage.getItem("theme");
+  function aplicarTema(theme) {
+    const isDark = theme === "dark";
 
-    if (temaSalvo === "light") {
-      document.documentElement.classList.remove("dark-mode");
-      document.body.classList.remove("dark-mode");
-      if (themeToggle) themeToggle.textContent = "🌙";
-    } else {
-      document.documentElement.classList.add("dark-mode");
-      document.body.classList.add("dark-mode");
-      if (themeToggle) themeToggle.textContent = "☀️";
+    html.classList.toggle("dark-mode", isDark);
+    body.classList.toggle("dark-mode", isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    if (themeToggle) {
+      themeToggle.textContent = isDark ? "☀️" : "🌙";
+    }
+
+    if (themeMeta) {
+      themeMeta.setAttribute("content", isDark ? "#14171d" : "#fffafb");
     }
   }
 
@@ -40,15 +41,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       .replace(/\s+/g, " ");
   }
 
-  aplicarTemaSalvo();
+  const temaSalvo = localStorage.getItem("theme") || "dark";
+  aplicarTema(temaSalvo);
 
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-      const ativouDark = !document.body.classList.contains("dark-mode");
-      document.body.classList.toggle("dark-mode", ativouDark);
-      document.documentElement.classList.toggle("dark-mode", ativouDark);
-      themeToggle.textContent = ativouDark ? "☀️" : "🌙";
-      localStorage.setItem("theme", ativouDark ? "dark" : "light");
+      const isDark = html.classList.contains("dark-mode");
+      aplicarTema(isDark ? "light" : "dark");
     });
   }
 
@@ -80,9 +79,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (imagemEl) {
     imagemEl.src = imagem || "pic.png";
     imagemEl.alt = produto;
+    imagemEl.loading = "eager";
+    imagemEl.decoding = "async";
   }
 
   if (!btn) {
+    liberarPagina();
     console.error("Botão checkoutFinalizarBtn não encontrado no HTML.");
     return;
   }
@@ -110,9 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   atualizarCountdown();
   countdownInterval = setInterval(atualizarCountdown, 1000);
 
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
-
+  btn.addEventListener("click", () => {
     const destino = pagamento || (isVip ? "https://t.me/LauretePriveBot?start=ch" : "");
 
     if (!destino) {
@@ -123,11 +123,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     btn.disabled = true;
     btn.textContent = isVip ? "Abrindo VIP..." : "Abrindo pagamento...";
 
-    window.open(destino, "_blank", "noopener,noreferrer");
-
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.textContent = isVip ? "Acessar VIP →" : "Finalizar Compra →";
-    }, 1500);
+    window.location.href = destino;
   });
+
+  liberarPagina();
 });

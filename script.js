@@ -256,8 +256,10 @@ document.addEventListener("DOMContentLoaded", () => {
       body.classList.add("page-leaving");
 
       setTimeout(() => {
-        window.location.href = url.href;
-      }, 180);
-    });
-  });
+  window.location.href = url.href;
+}, 180);
+});
+});
+  
+document.documentElement.classList.add("page-ready");
 });
