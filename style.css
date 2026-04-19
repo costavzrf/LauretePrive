@@ -9428,3 +9428,247 @@ section,
     right: 16px;
   }
 }
+/* ===== CHECKOUT - COMO FUNCIONA ===== */
+
+.checkout-como-funciona {
+  margin-top: 34px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(233, 135, 184, 0.28);
+  background: rgba(13, 18, 34, 0.92);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(233, 135, 184, 0.05);
+}
+
+.checkout-como-header {
+  padding: 16px 24px;
+  background: linear-gradient(90deg, #f38db2 0%, #a855f7 100%);
+}
+
+.checkout-como-header h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.checkout-como-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding: 24px;
+}
+
+.checkout-como-card {
+  background: rgba(16, 22, 42, 0.96);
+  border: 1px solid rgba(233, 135, 184, 0.18);
+  border-radius: 22px;
+  padding: 26px 22px;
+  text-align: center;
+  min-height: 196px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition: 0.25s ease;
+}
+
+.checkout-como-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.checkout-como-numero {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  background: rgba(243, 141, 178, 0.14);
+  color: #ff92b7;
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.checkout-como-card h4 {
+  margin: 0 0 12px;
+  color: #f4ebef;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.checkout-como-card p {
+  margin: 0;
+  color: rgba(244, 235, 239, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 250px;
+}
+
+/* modo claro */
+body:not(.dark-mode) .checkout-como-funciona {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(233, 135, 184, 0.22);
+  box-shadow:
+    0 18px 40px rgba(236, 169, 198, 0.14),
+    0 0 0 1px rgba(233, 135, 184, 0.05);
+}
+
+body:not(.dark-mode) .checkout-como-card {
+  background: #fffafb;
+  border: 1px solid rgba(233, 135, 184, 0.14);
+}
+
+body:not(.dark-mode) .checkout-como-numero {
+  background: rgba(243, 141, 178, 0.12);
+  color: #d46393;
+}
+
+body:not(.dark-mode) .checkout-como-card h4 {
+  color: #2f2f2f;
+}
+
+body:not(.dark-mode) .checkout-como-card p {
+  color: #666;
+}
+
+@media (max-width: 980px) {
+  .checkout-como-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-como-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .checkout-como-header {
+    padding: 14px 16px;
+  }
+
+  .checkout-como-header h3 {
+    font-size: 1.4rem;
+  }
+
+  .checkout-como-grid {
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .checkout-como-card {
+    padding: 22px 16px;
+    border-radius: 18px;
+  }
+
+  .checkout-como-numero {
+    width: 42px;
+    height: 42px;
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+  }
+
+  .checkout-como-card h4 {
+    font-size: 1rem;
+  }
+
+  .checkout-como-card p {
+    font-size: 0.92rem;
+  }
+}
+/* ===== FIX FINAL COMO FUNCIONA ===== */
+
+.checkout-como-funciona {
+  max-width: 1200px;
+  margin: 20px auto 0 auto; /* ↓ diminui espaço */
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(13, 18, 34, 0.92);
+  border: 1px solid rgba(233, 135, 184, 0.28);
+}
+
+/* remove qualquer padding externo que quebrou o layout */
+.checkout-como-funciona {
+  padding: 0 !important;
+}
+
+/* garante que o topo siga o arredondado */
+.checkout-como-header {
+  border-radius: 24px 24px 0 0;
+}
+
+/* garante que o fundo preencha tudo */
+.checkout-como-grid {
+  background: transparent;
+}
+
+/* diminui o espaço entre checkout e essa seção */
+.checkout-section + .checkout-como-funciona {
+  margin-top: 20px;
+}
+/* diminuir espaço acima do "Como funciona" */
+.checkout-como-funciona {
+  margin-top: 8px !important;
+}
+
+/* garante que a section de cima não empurre */
+.checkout-section {
+  margin-bottom: 0 !important;
+  padding-bottom: 10px !important;
+}
+/* ===== FIX MOBILE - COMO FUNCIONA ===== */
+@media (max-width: 700px) {
+  .checkout-como-funciona {
+    width: calc(100% - 24px) !important;
+    max-width: none !important;
+    margin: 12px auto 0 auto !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+  }
+
+  .checkout-como-header {
+    padding: 14px 16px !important;
+    border-radius: 18px 18px 0 0 !important;
+  }
+
+  .checkout-como-header h3 {
+    font-size: 1.2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .checkout-como-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 14px !important;
+  }
+
+  .checkout-como-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 20px 14px !important;
+    border-radius: 16px !important;
+    min-height: auto !important;
+  }
+
+  .checkout-como-card h4 {
+    font-size: 0.98rem !important;
+  }
+
+  .checkout-como-card p {
+    max-width: 100% !important;
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+    word-break: break-word !important;
+  }
+
+  .checkout-como-numero {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 12px !important;
+  }
+}
